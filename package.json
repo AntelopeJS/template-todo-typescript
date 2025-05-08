@@ -1,0 +1,43 @@
+{
+  "name": "antelopejs-module",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ajs project run -w",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.25.0",
+    "eslint": "^9.25.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-import-resolver-typescript": "^4.3.4",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
+  },
+  "antelopeJs": {
+    "imports": [
+      "core@beta",
+      "database@beta",
+      "database-decorators@beta",
+      "api@beta",
+      "auth@beta",
+      "data-api@beta"
+    ],
+    "baseUrl": "dist",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
+  },
+  "packageManager": "pnpm@10.6.5"
+}
