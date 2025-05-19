@@ -1,5 +1,3 @@
-/// <reference types="node" />
-import { ClassDecorator, Class } from '@ajs/core/beta/decorators';
 import { IncomingMessage, ServerResponse } from 'http';
 /**
  * Function type that extracts authentication data from HTTP request.
@@ -66,13 +64,13 @@ export type AuthValidator<T = unknown, R = unknown> = (data: T) => Promise<R> | 
  * ```
  */
 export interface CookieOptions {
-  maxAge?: number;
-  signed?: boolean;
-  expires?: Date;
-  httpOnly?: boolean;
-  path?: string;
-  domain?: string;
-  secure?: boolean;
+    maxAge?: number;
+    signed?: boolean;
+    expires?: Date;
+    httpOnly?: boolean;
+    path?: string;
+    domain?: string;
+    secure?: boolean;
 }
 /**
  * Options for signing authentication tokens.
@@ -89,14 +87,14 @@ export interface CookieOptions {
  * ```
  */
 export interface SignOptions {
-  /**
-   * Expiration as a number of seconds or a timespan string.
-   */
-  expiresIn?: string | number;
-  /**
-   * Not-before field as a number of seconds or a timespan string.
-   */
-  notBefore?: string | number;
+    /**
+     * Expiration as a number of seconds or a timespan string.
+     */
+    expiresIn?: string | number;
+    /**
+     * Not-before field as a number of seconds or a timespan string.
+     */
+    notBefore?: string | number;
 }
 /**
  * Options for verifying authentication tokens.
@@ -114,18 +112,18 @@ export interface SignOptions {
  * ```
  */
 export interface VerifyOptions {
-  /**
-   * Ignore signature expiration.
-   */
-  ignoreExpiration?: boolean;
-  /**
-   * Ignore signature not-before field.
-   */
-  ignoreNotBefore?: boolean;
-  /**
-   * Maximum signature age as a number of seconds or a timespan string.
-   */
-  maxAge?: string | number;
+    /**
+     * Ignore signature expiration.
+     */
+    ignoreExpiration?: boolean;
+    /**
+     * Ignore signature not-before field.
+     */
+    ignoreNotBefore?: boolean;
+    /**
+     * Maximum signature age as a number of seconds or a timespan string.
+     */
+    maxAge?: string | number;
 }
 /**
  * Verifies the signature of some signed data and returns the data contained therein.
@@ -154,7 +152,7 @@ export declare function ValidateRaw<T = any>(token: string, options?: VerifyOpti
  * const token = SignRaw({ userId: 123, role: 'admin' }, { expiresIn: '24h' });
  * ```
  */
-export declare function SignRaw(data: any, options?: SignOptions): Promise<string>;
+export declare function SignRaw(data: string | Buffer | object, options?: SignOptions): Promise<string>;
 /**
  * Signs some data and attaches it to an HTTP Response object as a cookie.
  *
@@ -174,12 +172,7 @@ export declare function SignRaw(data: any, options?: SignOptions): Promise<strin
  * );
  * ```
  */
-export declare function SignServerResponse(
-  res: ServerResponse,
-  data: any,
-  signOptions?: SignOptions,
-  cookieOptions?: CookieOptions,
-): Promise<ServerResponse>;
+export declare function SignServerResponse(res: ServerResponse, data: string | Buffer | object, signOptions?: SignOptions, cookieOptions?: CookieOptions): Promise<ServerResponse<IncomingMessage>>;
 /**
  * Creates a Parameter Provider using the specified source and signature verification callbacks.
  *
@@ -218,16 +211,11 @@ export declare function SignServerResponse(
  * ```
  */
 export declare function CreateAuthDecorator<R = unknown, T = unknown>(callbacks: {
-  source?: AuthSource;
-  authenticator?: AuthVerifier<T>;
-  authenticatorOptions?: VerifyOptions;
-  validator?: AuthValidator<T, R>;
-}): (
-  validator?: AuthValidator<unknown, unknown> | undefined,
-) => ClassDecorator<Class<any, any[]>> &
-  import('@ajs/core/beta/decorators').PropertyDecorator &
-  import('@ajs/core/beta/decorators').MethodDecorator &
-  import('@ajs/core/beta/decorators').ParameterDecorator;
+    source?: AuthSource;
+    authenticator?: AuthVerifier<T>;
+    authenticatorOptions?: VerifyOptions;
+    validator?: AuthValidator<T, R>;
+}): (validator?: AuthValidator<T, R> | undefined) => import("@ajs/core/beta/decorators").ClassDecorator<import("@ajs/core/beta/decorators").Class<any, any[]>> & import("@ajs/core/beta/decorators").PropertyDecorator & import("@ajs/core/beta/decorators").MethodDecorator & import("@ajs/core/beta/decorators").ParameterDecorator;
 /**
  * Parameter Provider using the default source and signature verification callbacks.
  * This decorator can be applied to parameters, methods, properties, or classes to
@@ -258,9 +246,4 @@ export declare function CreateAuthDecorator<R = unknown, T = unknown>(callbacks:
  *
  * @see {@link CreateAuthDecorator}
  */
-export declare const Authentication: (
-  validator?: AuthValidator<unknown, unknown> | undefined,
-) => ClassDecorator<Class<any, any[]>> &
-  import('@ajs/core/beta/decorators').PropertyDecorator &
-  import('@ajs/core/beta/decorators').MethodDecorator &
-  import('@ajs/core/beta/decorators').ParameterDecorator;
+export declare const Authentication: (validator?: AuthValidator<unknown, unknown> | undefined) => import("@ajs/core/beta/decorators").ClassDecorator<import("@ajs/core/beta/decorators").Class<any, any[]>> & import("@ajs/core/beta/decorators").PropertyDecorator & import("@ajs/core/beta/decorators").MethodDecorator & import("@ajs/core/beta/decorators").ParameterDecorator;

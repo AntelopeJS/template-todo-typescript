@@ -289,10 +289,13 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/node,linux,macos,windows,webstorm,sonarqube,visualstudiocode
 
+# Ignore stuff
+dist/
+
+antelope.json
+antelope.*.json
 .antelope/cache/
-backtrace.js
-db_backup.json
-dist
+
 # pnpm store
 .pnpm-store/
 
