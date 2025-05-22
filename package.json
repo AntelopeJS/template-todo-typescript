@@ -4,25 +4,12 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ajs project run -w",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "format": "prettier --write ."
+    "dev": "ajs project run -w"
   },
   "devDependencies": {
     "@antelopejs/core": "^0.0.2",
-    "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.25.0",
     "@types/node": "^22.14.1",
-    "eslint": "^9.25.0",
-    "eslint-config-prettier": "^10.1.2",
-    "eslint-import-resolver-typescript": "^4.3.4",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.6",
-    "globals": "^16.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.30.1"
+    "typescript": "^5.8.3"
   },
   "antelopeJs": {
     "imports": [
