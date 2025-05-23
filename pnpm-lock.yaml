@@ -14,6 +14,12 @@ importers:
       '@types/node':
         specifier: ^22.14.1
         version: 22.14.1
+      '@types/randomstring':
+        specifier: 1.3.0
+        version: 1.3.0
+      randomstring:
+        specifier: 1.3.1
+        version: 1.3.1
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -155,6 +161,9 @@ packages:
 
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
+
+  '@types/randomstring@1.3.0':
+    resolution: {integrity: sha512-kCP61wludjY7oNUeFiMxfswHB3Wn/aC03Cu82oQsNTO6OCuhVN/rCbBs68Cq6Nkgjmp2Sh3Js6HearJPkk7KQA==}
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -623,6 +632,10 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
+  randomstring@1.3.1:
+    resolution: {integrity: sha512-lgXZa80MUkjWdE7g2+PZ1xDLzc7/RokXVEQOv5NN2UOTChW1I8A9gha5a9xYBOqgaSoI6uJikDmCU8PyRdArRQ==}
+    hasBin: true
+
   readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
 
@@ -992,6 +1005,8 @@ snapshots:
   '@types/node@22.14.1':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/randomstring@1.3.0': {}
 
   ansi-align@3.0.1:
     dependencies:
@@ -1467,6 +1482,10 @@ snapshots:
   randombytes@2.1.0:
     dependencies:
       safe-buffer: 5.2.1
+
+  randomstring@1.3.1:
+    dependencies:
+      randombytes: 2.1.0
 
   readable-stream@2.3.8:
     dependencies:
