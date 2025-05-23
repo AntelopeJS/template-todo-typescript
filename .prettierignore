@@ -1,9 +1,0 @@
-node_modules
-tmp
-dist
-.antelope/cache
-coverage
-.git
-*.log
-**/*.min.js
-pnpm-lock.yaml 
