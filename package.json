@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "postinstall": "ajs module imports update",
+    "prepare": "ajs module imports install",
     "dev": "ajs project run -w"
   },
   "devDependencies": {
