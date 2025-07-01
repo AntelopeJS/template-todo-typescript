@@ -72,10 +72,10 @@ ajs project init my-project-name
 
 2. When prompted if you have an app module, select "yes"
 
-3. Configure dependencies
+3. Install dependencies
 
 ```bash
-ajs project modules fix
+ajs project modules install
 ```
 
 4. Run your project
