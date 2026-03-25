@@ -1,7 +1,7 @@
-import { Controller, Post, Get, Context, RequestContext, HTTPResult, RawBody } from '@ajs/api/beta';
+import { Controller, Post, Get, Context, RequestContext, HTTPResult, RawBody } from '@ajs/api';
 import { getUserModel } from '../db/models/user.model';
 import { User } from '../db/tables/user.table';
-import { SignRaw, Authentication } from '@ajs/auth/beta';
+import { SignRaw, Authentication } from '@ajs/auth';
 
 // Configuration
 const TOKEN_EXPIRY = '24h';

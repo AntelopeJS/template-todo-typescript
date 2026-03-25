@@ -1,4 +1,4 @@
-import { Table, Index, RegisterTable } from '@ajs/database-decorators/beta';
+import { Table, Index, RegisterTable } from '@ajs/database-decorators';
 
 /**
  * Task table definition with title, description and userId fields

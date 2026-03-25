@@ -1,4 +1,4 @@
-import { Table, Index, HashModifier, Hashed, RegisterTable } from '@ajs/database-decorators/beta';
+import { Table, Index, HashModifier, Hashed, RegisterTable } from '@ajs/database-decorators';
 
 /**
  * User table definition with basic user fields

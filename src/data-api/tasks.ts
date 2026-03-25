@@ -1,10 +1,10 @@
-import { Controller } from '@ajs/api/beta';
-import { DataController, DefaultRoutes, RegisterDataController } from '@ajs/data-api/beta';
-import { Authentication } from '@ajs/auth/beta';
+import { Controller } from '@ajs/api';
+import { DataController, DefaultRoutes, RegisterDataController } from '@ajs/data-api';
+import { Authentication } from '@ajs/auth';
 import { Task } from '../db/tables/task.table';
 import { TaskModel } from '../db/models/task.model';
-import { Access, AccessMode, Listable, Mandatory, ModelReference, Sortable } from '@ajs/data-api/beta/metadata';
-import { StaticModel } from '@ajs/database-decorators/beta';
+import { Access, AccessMode, Listable, Mandatory, ModelReference, Sortable } from '@ajs/data-api/metadata';
+import { StaticModel } from '@ajs/database-decorators';
 
 /**
  * Custom route definition with authentication

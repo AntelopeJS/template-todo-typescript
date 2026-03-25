@@ -1,4 +1,4 @@
-import { BasicDataModel, GetModel } from '@ajs/database-decorators/beta';
+import { BasicDataModel, GetModel } from '@ajs/database-decorators';
 import { Task } from '../tables/task.table';
 
 // Create a basic model for the Task table

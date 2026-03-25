@@ -1,4 +1,4 @@
-import { InitializeDatabaseFromSchema } from '@ajs/database-decorators/beta';
+import { InitializeDatabaseFromSchema } from '@ajs/database-decorators';
 import './db';
 import './routes';
 import './data-api';

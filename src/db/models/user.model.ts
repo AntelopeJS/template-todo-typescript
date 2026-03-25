@@ -1,4 +1,4 @@
-import { BasicDataModel, GetModel } from '@ajs/database-decorators/beta';
+import { BasicDataModel, GetModel } from '@ajs/database-decorators';
 import { User } from '../tables/user.table';
 
 // Create a basic model for the User table

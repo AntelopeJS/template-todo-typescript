@@ -4,29 +4,19 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "ajs module imports install",
     "dev": "ajs project run -w"
   },
   "devDependencies": {
-    "@types/node": "^22.14.1",
-    "typescript": "^5.8.3"
+    "@types/node": "^22.19.15",
+    "typescript": "^5.9.3"
   },
   "antelopeJs": {
-    "imports": [
-      "core@beta",
-      "database@beta",
-      "database-decorators@beta",
-      "api@beta",
-      "auth@beta",
-      "data-api@beta"
-    ],
     "baseUrl": "dist",
     "paths": {
       "@/*": [
         "*"
       ]
-    },
-    "importsOptional": []
+    }
   },
   "packageManager": "pnpm@10.6.5"
 }
