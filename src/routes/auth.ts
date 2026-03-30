@@ -1,7 +1,7 @@
-import { Controller, Post, Get, Context, RequestContext, HTTPResult, RawBody } from '@ajs/api';
+import { Controller, Post, Get, Context, RequestContext, HTTPResult, RawBody } from '@antelopejs/interface-api';
 import { getUserModel } from '../db/models/user.model';
 import { User } from '../db/tables/user.table';
-import { SignRaw, Authentication } from '@ajs/auth';
+import { SignRaw, Authentication } from '@antelopejs/interface-auth';
 
 // Configuration
 const TOKEN_EXPIRY = '24h';

@@ -6,6 +6,14 @@
   "scripts": {
     "dev": "ajs project run -w"
   },
+  "dependencies": {
+    "@antelopejs/interface-core": "^0.0.2",
+    "@antelopejs/interface-api": "^0.0.2",
+    "@antelopejs/interface-auth": "^0.0.2",
+    "@antelopejs/interface-database": "^0.0.2",
+    "@antelopejs/interface-database-decorators": "^0.0.2",
+    "@antelopejs/interface-data-api": "^0.0.2"
+  },
   "devDependencies": {
     "@types/node": "^22.19.15",
     "typescript": "^5.9.3"

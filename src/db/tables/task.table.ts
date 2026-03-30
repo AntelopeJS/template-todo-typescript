@@ -1,11 +1,10 @@
-import { Table, Index, RegisterTable } from '@ajs/database-decorators';
+import { Table, Index, RegisterTable } from '@antelopejs/interface-database-decorators';
 
 /**
  * Task table definition with title, description and userId fields
  */
 @RegisterTable('tasks', 'default')
 export class Task extends Table {
-  @Index({ primary: true })
   declare _id: string;
 
   declare title: string;

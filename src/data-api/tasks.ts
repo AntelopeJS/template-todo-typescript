@@ -1,10 +1,10 @@
-import { Controller } from '@ajs/api';
-import { DataController, DefaultRoutes, RegisterDataController } from '@ajs/data-api';
-import { Authentication } from '@ajs/auth';
+import { Controller } from '@antelopejs/interface-api';
+import { DataController, DefaultRoutes, RegisterDataController } from '@antelopejs/interface-data-api';
+import { Authentication } from '@antelopejs/interface-auth';
 import { Task } from '../db/tables/task.table';
 import { TaskModel } from '../db/models/task.model';
-import { Access, AccessMode, Listable, Mandatory, ModelReference, Sortable } from '@ajs/data-api/metadata';
-import { StaticModel } from '@ajs/database-decorators';
+import { Access, AccessMode, Listable, Mandatory, ModelReference, Sortable } from '@antelopejs/interface-data-api/metadata';
+import { Model } from '@antelopejs/interface-database-decorators';
 
 /**
  * Custom route definition with authentication
@@ -39,7 +39,7 @@ const AuthenticatedRoutes = {
 @RegisterDataController()
 export class TaskDataAPI extends DataController(Task, AuthenticatedRoutes, Controller('/tasks')) {
   @ModelReference()
-  @StaticModel(TaskModel, 'default')
+  @Model(TaskModel)
   declare taskModel: TaskModel;
 
   @Listable()
