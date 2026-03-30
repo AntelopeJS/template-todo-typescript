@@ -1,91 +1,87 @@
-# AntelopeJS TypeScript Sample Template
+# AntelopeJS Todo App Template
 
-This repository contains a complete TypeScript application demonstrating the core features of AntelopeJS including authentication, data management, and RESTful APIs.
+<div align="center">
+<a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge&labelColor=000000"></a>
+<a href="https://discord.gg/sjK28QHrA7"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
+</div>
 
-## Features
+A full-featured sample application demonstrating core AntelopeJS patterns: database models with decorators, JWT authentication, RESTful controllers, and automatic CRUD generation.
 
-- TypeScript-based application structure
-- Database models with decorators for table definitions
-- User authentication with JWT tokens
-- Data models with business logic
-- RESTful API endpoints
-- Automatic CRUD operations with Data API
+## Quick start
 
-## Application Structure
+1. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+2. Start development mode:
+
+   ```bash
+   pnpm run dev
+   ```
+
+> **Note:** The `antelope.config.ts` file defines the required modules (API server, MongoDB, auth-jwt, etc.) and their configuration. Adjust connection strings and secrets before running.
+
+## Application structure
 
 ```
 src/
-├── index.ts            // Application entry point
-├── db/                 // Database layer
-│   ├── tables/         // Table definitions
-│   ├── models/         // Data models with business logic
-├── routes/             // API routes and controllers
-└── data-api/           // Data API controllers
+├── index.ts              # Entry point — initializes the database schema
+├── db/
+│   ├── tables/           # Table definitions with decorators
+│   │   ├── user.table.ts
+│   │   └── task.table.ts
+│   └── models/           # Data models with business logic
+│       ├── user.model.ts
+│       └── task.model.ts
+├── routes/
+│   └── auth.ts           # Authentication controller
+└── data-api/
+    └── tasks.ts          # Auto-generated CRUD controller
+antelope.config.ts        # AntelopeJS project configuration
 ```
 
-## Included Components
+## Included components
 
-### Database Tables
+### Database tables
 
-- User table with authentication fields
-- Task table with relationship to users
+The `User` table uses the `HashModifier` mixin to automatically hash passwords via the `@Hashed` decorator. The `Task` table stores tasks linked to a user through a `userId` index.
 
-### Data Models
+### Data models
 
-- UserModel with login/registration methods
-- TaskModel with CRUD operations
+`UserModel` and `TaskModel` extend `BasicDataModel` to provide typed access to the database. Each model adds custom query methods like `getUserByEmail` and `getTasksByUserId`.
 
 ### Authentication
 
-- User registration endpoint
-- Login endpoint with JWT token generation
-- Protected profile endpoint
+The `AuthController` handles registration, login, and profile retrieval. Passwords are automatically hashed on insert and compared transparently on login. The `SignRaw` function generates JWT tokens, and the `@Authentication` decorator protects routes.
 
-### Task Management API
+### Task management API
 
-- Automatically generated CRUD endpoints
-- Authentication protection
+The `TaskDataAPI` controller extends `DataController` to generate CRUD endpoints automatically. All routes require authentication through a custom route definition that prepends the `@Authentication` decorator.
 
-## Available Endpoints
+## API endpoints
 
-### Authentication Endpoints
+### Authentication
 
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login and get a JWT token
-- `GET /auth/me` - Get current user profile (requires authentication)
+| Method | Endpoint         | Description                |
+| ------ | ---------------- | -------------------------- |
+| POST   | `/auth/register` | Register a new user        |
+| POST   | `/auth/login`    | Login and receive a JWT    |
+| GET    | `/auth/me`       | Get the authenticated user |
 
-### Task Management Endpoints
+### Task management
 
-- `GET /tasks` - List all tasks (requires authentication)
-- `GET /tasks/:id` - Get a specific task (requires authentication)
-- `POST /tasks` - Create a new task (requires authentication)
-- `PUT /tasks/:id` - Update a task (requires authentication)
-- `DELETE /tasks/:id` - Delete a task (requires authentication)
+All task endpoints require a valid JWT token.
 
-## Getting Started
+| Method | Endpoint      | Description         |
+| ------ | ------------- | ------------------- |
+| GET    | `/tasks`      | List all tasks      |
+| GET    | `/tasks/:id`  | Get a specific task |
+| POST   | `/tasks`      | Create a new task   |
+| PUT    | `/tasks/:id`  | Update a task       |
+| DELETE | `/tasks/:id`  | Delete a task       |
 
-1. Initialize a new AntelopeJS project
+## Learn more
 
-```bash
-ajs project init my-project-name
-```
-
-2. When prompted if you have an app module, select "yes"
-
-3. Install dependencies
-
-```bash
-ajs project modules install
-```
-
-4. Run your project
-
-```bash
-ajs project run
-# Or with watch mode for development
-ajs project run -w
-```
-
-## Learn More
-
-For a detailed walkthrough of how this template works, check out the [Full-Stack App Tutorial](https://antelopejs.com/docs/guides/full-stack-app-tutorial) in the AntelopeJS documentation.
+For a detailed walkthrough of this template, see the [Full-Stack App Tutorial](https://antelopejs.com/docs/guides/full-stack-app-tutorial) in the AntelopeJS documentation.
