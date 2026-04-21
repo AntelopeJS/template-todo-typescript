@@ -1,4 +1,4 @@
-import { BasicDataModel, GetModel } from '@antelopejs/interface-database-decorators';
+import { BasicDataModel } from '@antelopejs/interface-database-decorators';
 import { Task } from '../tables/task.table';
 
 // Create a basic model for the Task table
@@ -46,13 +46,4 @@ export class TaskModel extends TaskModelBase {
 
     return this.update(id, updateData);
   }
-}
-
-/**
- * Get or create a TaskModel instance for the specified database
- * @param databaseName Database name
- * @returns TaskModel instance
- */
-export function getTaskModel(databaseName: string = 'main') {
-  return GetModel(TaskModel, databaseName);
 }

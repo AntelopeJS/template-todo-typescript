@@ -1,4 +1,4 @@
-import { BasicDataModel, GetModel } from '@antelopejs/interface-database-decorators';
+import { BasicDataModel } from '@antelopejs/interface-database-decorators';
 import { User } from '../tables/user.table';
 
 // Create a basic model for the User table
@@ -46,13 +46,4 @@ export class UserModel extends UserModelBase {
 
     return this.update(id, updateData);
   }
-}
-
-/**
- * Get or create a UserModel instance for the specified database
- * @param databaseName Database name
- * @returns UserModel instance
- */
-export function getUserModel(databaseName: string = 'main') {
-  return GetModel(UserModel, databaseName);
 }
