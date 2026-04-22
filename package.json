@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "@antelopejs/interface-api": "^0.0.3",
-    "@antelopejs/interface-auth": "^0.0.3",
+    "@antelopejs/interface-auth": "^0.0.4",
     "@antelopejs/interface-core": "^0.0.3",
-    "@antelopejs/interface-data-api": "^0.0.3",
+    "@antelopejs/interface-data-api": "^0.0.4",
     "@antelopejs/interface-database": "^0.0.4",
-    "@antelopejs/interface-database-decorators": "^0.0.3"
+    "@antelopejs/interface-database-decorators": "^0.0.4"
   },
   "devDependencies": {
     "@types/node": "^22.19.15",
