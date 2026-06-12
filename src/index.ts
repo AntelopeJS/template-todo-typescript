@@ -1,4 +1,4 @@
-import { CreateDatabaseSchemaInstance } from '@antelopejs/interface-database-decorators';
+import { RegisterSchema } from '@antelopejs/interface-database-decorators';
 import './db';
 import './routes';
 import './data-api';
@@ -6,7 +6,7 @@ import './data-api';
 export function construct(): void {}
 
 export async function start(): Promise<void> {
-  await CreateDatabaseSchemaInstance('default', 'default');
+  await RegisterSchema('default');
 }
 
 export function destroy(): void {}
