@@ -5,6 +5,8 @@
     "module": "commonjs",
     "lib": ["esnext", "dom"],
     "allowJs": true,
+    "incremental": true,
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "outDir": "dist",
     "strict": true,
     "noImplicitAny": true,
