@@ -39,7 +39,10 @@ src/
 │   └── auth.ts           # Authentication controller
 └── data-api/
     └── tasks.ts          # Auto-generated CRUD controller
+test/
+└── example.test.ts       # Sample test
 antelope.config.ts        # AntelopeJS project configuration
+antelope.test.ts          # Test configuration
 ```
 
 ## Included components
@@ -82,6 +85,16 @@ All task endpoints require a valid JWT token.
 | PUT    | `/tasks/:id`  | Update a task       |
 | DELETE | `/tasks/:id`  | Delete a task       |
 
+## Tests
+
+`antelope.test.ts` is the test configuration that `antelopeJs.test` points to in `package.json`. `ajs module test` runs the `*.test.ts` files of the `test/` folder with Mocha:
+
+```bash
+pnpm test
+```
+
+In tests, an interface function rejects unless a loaded module implements it. To test code that uses the database, the API or the authentication, add the modules that implement these interfaces to the `modules` of `antelope.test.ts`. Type annotations in the `.ts` test files rely on the type stripping of Node.js, enabled by default from Node.js 22.18.
+
 ## Learn more
 
-For a detailed walkthrough of this template, see the [Full-Stack App Tutorial](https://antelopejs.com/docs/guides/full-stack-app-tutorial) in the AntelopeJS documentation.
+For a detailed walkthrough of this template, see the [Full-Stack App Tutorial](https://antelopejs.com/docs/guides/full-stack-app-tutorial) in the AntelopeJS documentation, and [Testing](https://antelopejs.com/docs/module-development/testing) to write module tests.
