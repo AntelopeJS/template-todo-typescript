@@ -32,12 +32,6 @@ export default defineConfig({
       source: { type: 'package', package: '@antelopejs/auth-jwt', version: '^1.0.3' },
       config: { secret: 'test-secret' },
     },
-    'data-api': {
-      source: { type: 'package', package: '@antelopejs/data-api', version: '^1.1.1' },
-    },
-    'database-decorators': {
-      source: { type: 'package', package: '@antelopejs/database-decorators', version: '^1.1.1' },
-    },
     mongodb: {
       source: { type: 'package', package: '@antelopejs/mongodb', version: '^1.4.1' },
     },

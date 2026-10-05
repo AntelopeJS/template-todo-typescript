@@ -87,7 +87,7 @@ All task endpoints require a valid JWT token.
 
 ## Tests
 
-`antelope.test.ts` is the test configuration that `antelopeJs.test` points to in `package.json`. It builds the module with `tsc` and starts it with the modules that implement its interfaces: `@antelopejs/api`, `@antelopejs/auth-jwt`, `@antelopejs/data-api`, `@antelopejs/database-decorators` and `@antelopejs/mongodb`. `ajs module test` then runs the `*.test.ts` files of the `test/` folder with Mocha:
+`antelope.test.ts` is the test configuration that `antelopeJs.test` points to in `package.json`. It builds the module with `tsc` and starts it with the modules that implement its interfaces: `@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`. The data API and the database decorators need no module: `@antelopejs/interface-data-api` and `@antelopejs/interface-database-decorators` implement them. `ajs module test` then runs the `*.test.ts` files of the `test/` folder with Mocha:
 
 ```bash
 pnpm test
