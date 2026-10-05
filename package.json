@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ajs project run -w"
+    "dev": "ajs project run -w",
+    "test": "ajs module test"
   },
   "dependencies": {
     "@antelopejs/interface-api": ">=0.0.7 <1.0.0",
@@ -15,6 +16,7 @@
     "@antelopejs/interface-database-decorators": ">=0.1.4 <1.0.0"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.19.15",
     "typescript": "^5.9.3"
   },
@@ -24,7 +26,8 @@
       "@/*": [
         "*"
       ]
-    }
+    },
+    "test": "antelope.test.ts"
   },
   "packageManager": "pnpm@10.6.5"
 }
