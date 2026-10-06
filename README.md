@@ -40,7 +40,7 @@ src/
 └── data-api/
     └── tasks.ts          # Auto-generated CRUD controller
 test/
-└── example.test.ts       # Sample test
+└── example.test.ts       # Sample test of the todo API
 antelope.config.ts        # AntelopeJS project configuration
 antelope.test.ts          # Test configuration
 ```
@@ -87,13 +87,20 @@ All task endpoints require a valid JWT token.
 
 ## Tests
 
-`antelope.test.ts` is the test configuration that `antelopeJs.test` points to in `package.json`. `ajs module test` runs the `*.test.ts` files of the `test/` folder with Mocha:
+`antelope.test.ts` is the test configuration that `antelopeJs.test` points to in `package.json`. It builds the module with `tsc` and starts it with the modules that implement its interfaces: `@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`. The data API and the database decorators need no module: `@antelopejs/interface-data-api` and `@antelopejs/interface-database-decorators` implement them. `ajs module test` then runs the `*.test.ts` files of the `test/` folder with Mocha:
 
 ```bash
 pnpm test
 ```
 
-In tests, an interface function rejects unless a loaded module implements it. To test code that uses the database, the API or the authentication, add the modules that implement these interfaces to the `modules` of `antelope.test.ts`. Type annotations in the `.ts` test files rely on the type stripping of Node.js, enabled by default from Node.js 22.18.
+The tests need no running service. Before the modules start, the configuration:
+
+- starts a throwaway MongoDB server with [`mongodb-memory-server-core`](https://github.com/typegoose/mongodb-memory-server) and stops it after the tests;
+- serves the API on a free port of `127.0.0.1` and sets its address in the `TEST_API_URL` environment variable, which `test/example.test.ts` uses to call the routes of the module.
+
+The first run downloads a MongoDB server binary (about 120 MB) and caches it in `~/.cache/mongodb-binaries` for the next runs. To use a `mongod` that is already installed instead, set `MONGOMS_SYSTEM_BINARY` to its path.
+
+If you rename the module, rename it in `antelope.test.ts` too. Type annotations in the `.ts` test files rely on the type stripping of Node.js, enabled by default from Node.js 22.18.
 
 ## Learn more
 
