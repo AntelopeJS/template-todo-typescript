@@ -29,7 +29,7 @@ my-todo/
 
 ## Create it
 
-Install the CLI once with `npm install -g @antelopejs/core`, then create a project from this template and add the modules that implement its interfaces (`@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`):
+Install the CLI once with `pnpm add -g @antelopejs/core`, then create a project from this template and add the modules that implement its interfaces (`@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`):
 
 ```bash
 ajs project init my-todo --template "Todo App Typescript"
