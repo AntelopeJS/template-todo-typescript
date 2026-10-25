@@ -7,7 +7,7 @@ An AntelopeJS module template: a todo API with JWT authentication, on `@antelope
 - `src/index.ts` imports `./db`, `./routes` and `./data-api`. Those imports register the decorated tables, models and controllers, so keep them even though nothing reads their exports.
 - `src/db/tables` and `src/db/models` hold the schema; `src/routes` holds the auth controller; `src/data-api` holds the task CRUD controller.
 - `test/` holds the mocha suites. `antelope.test.ts` is their configuration for `ajs module test`: it builds the module with `npx tsc`, starts it with `@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`, serves the API on a free port, and starts a throwaway MongoDB.
-- The module name `antelopejs-module` appears in `package.json` and `antelope.test.ts`; rename it in both.
+- The module name `antelopejs-module` appears in `package.json`, `antelope.test.ts` and, once `ajs` has written it, `antelope.config.ts`; rename it in all three.
 
 ## Versions
 
@@ -20,6 +20,8 @@ The interface dependencies are consumer ranges, `>=<floor> <1.0.0`. Do not pin t
 - `typecheck` covers `src/` only. `test/` and `antelope.test.ts` are type-checked by nothing; `ajs module test` only runs them.
 - `guardrails.ratchet.json` records the lint findings the template already had. Its numbers only go down: after you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`; the ratchet counts it instead, and the pre-commit hook rejects it on every line you add.
 - lefthook runs oxfmt, oxlint, the size check and the ratchet on staged files before each commit, and `typecheck` before each push.
+- `ajs` installs dependencies before it runs `git init`, so a module created from the template starts without hooks. Run `pnpm exec lefthook install` once after `git init`.
+- `antelope.config.ts` is written by `ajs project init` and `ajs project modules install`, so oxfmt ignores it.
 
 <!-- antelopejs-guardrails:start -->
 <!-- Managed by @antelopejs/tooling-configs. `antelopejs-sync` rewrites everything between these markers; write repository-specific guidance outside them. -->
