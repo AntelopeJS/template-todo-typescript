@@ -20,7 +20,7 @@ The interface dependencies are consumer ranges, `>=<floor> <1.0.0`. Do not pin t
 - `typecheck` covers `src/` only. `test/` and `antelope.test.ts` are type-checked by nothing; `ajs module test` only runs them.
 - `guardrails.ratchet.json` records the lint findings the template already had. Its numbers only go down: after you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`; the ratchet counts it instead, and the pre-commit hook rejects it on every line you add.
 - lefthook runs oxfmt, oxlint, the size check and the ratchet on staged files before each commit, and `typecheck` before each push.
-- `ajs` installs dependencies before it runs `git init`, so a module created from the template starts without hooks. Run `pnpm exec lefthook install` once after `git init`.
+- `ajs` installs dependencies before it runs `git init`, so a module created from the template starts without hooks. Make the first commit with `git commit --no-verify`, then run `pnpm exec lefthook install`. With no previous commit, the ratchet hook counts every recorded finding as an added line and rejects that first commit.
 - `antelope.config.ts` is written by `ajs project init` and `ajs project modules install`, so oxfmt ignores it.
 
 <!-- antelopejs-guardrails:start -->
