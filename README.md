@@ -56,16 +56,16 @@ curl -X POST localhost:8080/tasks/new -H "x-antelopejs-auth: $TOKEN" -d '{"title
 curl localhost:8080/tasks/list -H "x-antelopejs-auth: $TOKEN"
 ```
 
-| Method | Route | What it does |
-| --- | --- | --- |
-| `POST` | `/auth/register` | Creates a user |
-| `POST` | `/auth/login` | Returns a JWT |
-| `GET` | `/auth/me` | Returns the authenticated user |
-| `GET` | `/tasks/list` | Lists tasks (paginated) |
-| `GET` | `/tasks/get?id=<id>` | Returns a task |
-| `POST` | `/tasks/new` | Creates a task |
-| `PUT` | `/tasks/edit?id=<id>` | Updates a task |
-| `DELETE` | `/tasks/delete?id=<id>` | Deletes a task |
+| Method   | Route                   | What it does                   |
+| -------- | ----------------------- | ------------------------------ |
+| `POST`   | `/auth/register`        | Creates a user                 |
+| `POST`   | `/auth/login`           | Returns a JWT                  |
+| `GET`    | `/auth/me`              | Returns the authenticated user |
+| `GET`    | `/tasks/list`           | Lists tasks (paginated)        |
+| `GET`    | `/tasks/get?id=<id>`    | Returns a task                 |
+| `POST`   | `/tasks/new`            | Creates a task                 |
+| `PUT`    | `/tasks/edit?id=<id>`   | Updates a task                 |
+| `DELETE` | `/tasks/delete?id=<id>` | Deletes a task                 |
 
 The `/tasks` routes answer `401` without a valid token.
 
@@ -89,7 +89,7 @@ Using Claude Code or Codex? Install the [AntelopeJS agent skills plugin](https:/
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md). Run `pnpm install` then `pnpm test` before you open a pull request.
+See [CONTRIBUTING.md](./CONTRIBUTING.md). Run `pnpm install` then `pnpm run checks` before you open a pull request.
 
 ## License
 
