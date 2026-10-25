@@ -1,14 +1,14 @@
-import { createServer } from 'node:net';
-import { defineConfig } from '@antelopejs/interface-core/config';
-import { MongoMemoryServer } from 'mongodb-memory-server-core';
+import { createServer } from "node:net";
+import { defineConfig } from "@antelopejs/interface-core/config";
+import { MongoMemoryServer } from "mongodb-memory-server-core";
 
 let mongod: MongoMemoryServer | undefined;
 
 function findFreePort(): Promise<number> {
   return new Promise((resolve, reject) => {
     const server = createServer();
-    server.once('error', reject);
-    server.listen(0, '127.0.0.1', () => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", () => {
       const { port } = server.address() as { port: number };
       server.close(() => resolve(port));
     });
@@ -16,28 +16,40 @@ function findFreePort(): Promise<number> {
 }
 
 export default defineConfig({
-  name: 'antelopejs-module-test',
+  name: "antelopejs-module-test",
   modules: {
-    'antelopejs-module': {
+    "antelopejs-module": {
       source: {
-        type: 'local',
-        path: '.',
-        installCommand: ['npx tsc'],
+        type: "local",
+        path: ".",
+        installCommand: ["npx tsc"],
       },
     },
     api: {
-      source: { type: 'package', package: '@antelopejs/api', version: '^1.3.3' },
+      source: {
+        type: "package",
+        package: "@antelopejs/api",
+        version: "^1.3.3",
+      },
     },
-    'auth-jwt': {
-      source: { type: 'package', package: '@antelopejs/auth-jwt', version: '^1.0.3' },
-      config: { secret: 'test-secret' },
+    "auth-jwt": {
+      source: {
+        type: "package",
+        package: "@antelopejs/auth-jwt",
+        version: "^1.0.3",
+      },
+      config: { secret: "test-secret" },
     },
     mongodb: {
-      source: { type: 'package', package: '@antelopejs/mongodb', version: '^1.4.1' },
+      source: {
+        type: "package",
+        package: "@antelopejs/mongodb",
+        version: "^1.4.1",
+      },
     },
   },
   test: {
-    folder: 'test',
+    folder: "test",
     // Serve the API on a free port, start a throwaway MongoDB server and point the modules to them.
     async setup() {
       const port = await findFreePort();
@@ -47,10 +59,13 @@ export default defineConfig({
       return {
         modules: {
           api: {
-            config: { publicBaseUrl: apiUrl, servers: [{ protocol: 'http', host: '127.0.0.1', port }] },
+            config: {
+              publicBaseUrl: apiUrl,
+              servers: [{ protocol: "http", host: "127.0.0.1", port }],
+            },
           },
           mongodb: {
-            config: { url: mongod.getUri(), database: 'antelopejs_test' },
+            config: { url: mongod.getUri(), database: "antelopejs_test" },
           },
         },
       };

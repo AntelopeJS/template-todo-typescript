@@ -1,8 +1,8 @@
-import { BasicDataModel } from '@antelopejs/interface-database-decorators';
-import { Task } from '../tables/task.table';
+import { BasicDataModel } from "@antelopejs/interface-database-decorators";
+import { Task } from "../tables/task.table";
 
 // Create a basic model for the Task table
-const TaskModelBase = BasicDataModel(Task, 'tasks');
+const TaskModelBase = BasicDataModel(Task, "tasks");
 
 /**
  * Extended Task Model with additional custom methods
@@ -14,7 +14,7 @@ export class TaskModel extends TaskModelBase {
    * @returns Array of tasks assigned to the user
    */
   async getTasksByUserId(userId: string) {
-    return this.getBy('userId', userId);
+    return this.getBy("userId", userId);
   }
 
   /**
@@ -22,7 +22,7 @@ export class TaskModel extends TaskModelBase {
    * @param taskData Task data without id, createdAt and updatedAt fields
    * @returns Created task
    */
-  async createTask(taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) {
+  async createTask(taskData: Omit<Task, "id" | "createdAt" | "updatedAt">) {
     const now = new Date();
 
     await this.insert({
@@ -38,7 +38,10 @@ export class TaskModel extends TaskModelBase {
    * @param taskData Partial task data to update
    * @returns Updated task
    */
-  async updateTask(id: string, taskData: Partial<Omit<Task, 'id' | 'createdAt'>>) {
+  async updateTask(
+    id: string,
+    taskData: Partial<Omit<Task, "id" | "createdAt">>,
+  ) {
     const updateData = {
       ...taskData,
       updatedAt: new Date(),

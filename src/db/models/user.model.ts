@@ -1,8 +1,8 @@
-import { BasicDataModel } from '@antelopejs/interface-database-decorators';
-import { User } from '../tables/user.table';
+import { BasicDataModel } from "@antelopejs/interface-database-decorators";
+import { User } from "../tables/user.table";
 
 // Create a basic model for the User table
-const UserModelBase = BasicDataModel(User, 'users');
+const UserModelBase = BasicDataModel(User, "users");
 
 /**
  * Extended User Model with additional custom methods
@@ -14,7 +14,9 @@ export class UserModel extends UserModelBase {
    * @returns User or undefined if not found
    */
   async getUserByEmail(email: string) {
-    return this.getBy('email', email).then((users) => (users.length > 0 ? users[0] : undefined));
+    return this.getBy("email", email).then((users) =>
+      users.length > 0 ? users[0] : undefined,
+    );
   }
 
   /**
@@ -22,7 +24,7 @@ export class UserModel extends UserModelBase {
    * @param userData User data without id, createdAt and updatedAt fields
    * @returns Created user
    */
-  async createUser(userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>) {
+  async createUser(userData: Omit<User, "id" | "createdAt" | "updatedAt">) {
     const now = new Date();
 
     await this.insert({
@@ -38,7 +40,10 @@ export class UserModel extends UserModelBase {
    * @param userData Partial user data to update
    * @returns Updated user
    */
-  async updateUser(id: string, userData: Partial<Omit<User, 'id' | 'createdAt'>>) {
+  async updateUser(
+    id: string,
+    userData: Partial<Omit<User, "id" | "createdAt">>,
+  ) {
     const updateData = {
       ...userData,
       updatedAt: new Date(),
