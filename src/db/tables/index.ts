@@ -1,2 +1,2 @@
-export * from './user.table';
-export * from './task.table';
+export * from "./user.table";
+export * from "./task.table";
