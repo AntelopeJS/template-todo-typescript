@@ -31,8 +31,8 @@ importers:
         specifier: ^1.17.1
         version: 1.17.1
       '@antelopejs/tooling-configs':
-        specifier: ^0.2.0
-        version: 0.2.0(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))
+        specifier: ^0.2.11
+        version: 0.2.11(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))
       '@types/mocha':
         specifier: ^10.0.10
         version: 10.0.10
@@ -112,8 +112,8 @@ packages:
     peerDependencies:
       '@antelopejs/interface-core': '>=0.0.3 <1.0.0'
 
-  '@antelopejs/tooling-configs@0.2.0':
-    resolution: {integrity: sha512-D3yCA9ZuvuDfzz8lS5VKyP8sgDkSdM0k1Awp3Q8qwq3u1/dc8UF4ep3SHW5fZpTQpLwNRcEDv1DSrRx+b7w9aA==}
+  '@antelopejs/tooling-configs@0.2.11':
+    resolution: {integrity: sha512-11reej4rSQuPEQqQgef60SyQZ8XGWlUSshD4RXLXPBpyFGVQmOqagKmj1zTg8QAktzwxxokhk/8JrIyChIv3LA==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
@@ -841,6 +841,11 @@ packages:
   diff@7.0.0:
     resolution: {integrity: sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==}
     engines: {node: '>=0.3.1'}
+
+  dts-bundle-generator@9.5.1:
+    resolution: {integrity: sha512-DxpJOb2FNnEyOzMkG11sxO2dmxPjthoVWxfKqWYJ/bI/rT1rvTMktF5EKjAYrRZu6Z6t3NhOUZ0sZ5ZXevOfbA==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   duplexify@3.7.1:
     resolution: {integrity: sha512-07z8uv2wMyS51kKhD1KsdXJg5WQ6t93RneqRxUHnskXVtlYYkLqM0gqStQZ3pj073g687jPCHrqNfCzawLYh5g==}
@@ -1625,9 +1630,11 @@ snapshots:
     dependencies:
       '@antelopejs/interface-core': 0.0.11
 
-  '@antelopejs/tooling-configs@0.2.0(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))':
+  '@antelopejs/tooling-configs@0.2.11(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))':
     dependencies:
       '@oxlint/plugins': 1.81.0
+      dts-bundle-generator: 9.5.1
+      typescript: 5.9.3
       yaml: 2.9.1
     optionalDependencies:
       knip: 6.43.0
@@ -2115,6 +2122,11 @@ snapshots:
   decamelize@4.0.0: {}
 
   diff@7.0.0: {}
+
+  dts-bundle-generator@9.5.1:
+    dependencies:
+      typescript: 5.9.3
+      yargs: 17.7.3
 
   duplexify@3.7.1:
     dependencies:
