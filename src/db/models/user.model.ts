@@ -23,9 +23,9 @@ export class UserModel extends UserModelBase {
    * Sets `createdAt` and `updatedAt` to the current time. `@Hashed()` stores
    * only a hash of `password`.
    *
-   * @param userData User data without `createdAt` and `updatedAt`
+   * @param userData The user's email and password
    */
-  async createUser(userData: Omit<User, "id" | "createdAt" | "updatedAt">) {
+  async createUser(userData: Pick<User, "email" | "password">) {
     const now = new Date();
 
     await this.insert({

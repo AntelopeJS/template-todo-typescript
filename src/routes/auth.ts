@@ -7,7 +7,6 @@ import {
   HTTPResult,
   RawBody,
 } from "@antelopejs/interface-api";
-import { User } from "../db/tables/user.table";
 import { SignRaw, Authentication } from "@antelopejs/interface-auth";
 import { Model } from "@antelopejs/interface-database-decorators";
 import { UserModel } from "../db";
@@ -64,10 +63,7 @@ export class AuthController extends Controller("/auth") {
       return new HTTPResult(409, "User with this email already exists");
     }
 
-    await this.userModel.createUser({
-      email,
-      password,
-    } as Omit<User, "id" | "createdAt" | "updatedAt">);
+    await this.userModel.createUser({ email, password });
   }
 
   /**
