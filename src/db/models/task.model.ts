@@ -20,12 +20,16 @@ export class TaskModel extends TaskModelBase {
    * Create a new task.
    * Sets `createdAt` and `updatedAt` to the current time.
    *
-   * @param taskData Task data without `createdAt` and `updatedAt`
+   * @param taskData The owner's `userId` and the task's fields
+   * @returns The id of the inserted task, in a one-element array
    */
-  async createTask(taskData: Omit<Task, "id" | "createdAt" | "updatedAt">) {
+  async createTask(
+    taskData: Pick<Task, "userId"> &
+      Partial<Pick<Task, "title" | "description">>,
+  ) {
     const now = new Date();
 
-    await this.insert({
+    return this.insert({
       ...taskData,
       createdAt: now,
       updatedAt: now,
