@@ -1,6 +1,6 @@
 {
   "rules": {
-    "anti-slop/require-safety-comment-for-type-assertion": 3
+    "anti-slop/require-safety-comment-for-type-assertion": 2
   },
   "oversizeFiles": {}
 }
