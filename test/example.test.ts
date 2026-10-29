@@ -7,7 +7,7 @@ function request(method, path, token, body) {
   return fetch(`${API_URL}${path}`, {
     method,
     headers: token ? { "x-antelopejs-auth": token } : {},
-    body: body && JSON.stringify(body),
+    ...(body && { body: JSON.stringify(body) }),
   });
 }
 
