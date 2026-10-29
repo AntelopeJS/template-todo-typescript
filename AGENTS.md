@@ -19,9 +19,8 @@ The interface dependencies are consumer ranges, `>=<floor> <1.0.0`. Do not pin t
 - `pnpm test` is `ajs module test`, from the `@antelopejs/core` dev dependency. The first run downloads a MongoDB binary (about 120 MB) into `~/.cache/mongodb-binaries`; set `MONGOMS_SYSTEM_BINARY` to use a local `mongod`.
 - `typecheck` covers `src/` only. `test/` and `antelope.test.ts` are type-checked by nothing; `ajs module test` only runs them.
 - `guardrails.suppressions.json` caps the lint directives, `@ts-expect-error` and `SAFETY:` comments; its numbers only go down. Fix the code rather than add a suppression.
-- `guardrails.ratchet.json` records the lint findings the template already had. Its numbers only go down: after you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`; the ratchet counts it instead, and the pre-commit hook rejects it on every line you add.
-- lefthook runs oxfmt, oxlint, the size check and the ratchet on staged files before each commit, and `typecheck` before each push.
-- `ajs` installs dependencies before it runs `git init`, so a module created from the template starts without hooks. Make the first commit with `git commit --no-verify`, then run `pnpm exec lefthook install`. With no previous commit, the ratchet hook counts every recorded finding as an added line and rejects that first commit.
+- `guardrails.ratchet.json` records the lint findings the template already had. Its numbers only go down: after you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`; the ratchet counts it instead, and `pnpm run checks` fails when a count rises.
+- `pnpm run checks` needs a git repository. `ajs module init` creates one unless you decline or pass `--no-git-init`; then run `git init` first.
 - `antelope.config.ts` is written by `ajs project init` and `ajs project modules install`, so oxfmt ignores it.
 
 <!-- antelopejs-guardrails:start -->
