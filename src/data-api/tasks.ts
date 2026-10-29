@@ -34,15 +34,19 @@ interface TaskRouteHost {
   taskModel: TaskModel;
 }
 
-/** The answer of the default routes for an id that names no row. */
+/** The answer the default `get` route gives for an id that names no row. */
 function notFound() {
   return new HTTPResult(404, "Not Found");
 }
 
-/** Whether the task `id` exists and belongs to `caller`. */
+/**
+ * Whether the task `id` exists, has an owner, and that owner is `caller`.
+ * False when the row is missing, has no `userId`, or the token has no `userId`.
+ */
 async function isOwnTask(model: TaskModel, id: string, caller: AuthUser) {
   const task = await model.get(id);
-  return task?.userId === caller.userId;
+  const owner = task?.userId;
+  return owner != null && owner === caller.userId;
 }
 
 /** The ids among `ids` that name tasks belonging to `caller`. */
@@ -80,8 +84,9 @@ async function writableFields(
  * Appending, rather than prepending, keeps the positional arguments the default
  * `DataController` handlers read, while a request without a valid token gets a
  * 401. `get`, `edit` and `delete` treat another user's task as a missing one;
- * `list` always filters on the caller's `userId`; `new` and `edit` write through
- * {@link TaskModel}, which sets the owner and the dates.
+ * `list` always filters on the caller's `userId`; `new` sets `userId` from the
+ * token; `new` and `edit` write through {@link TaskModel}, which sets the dates.
+ * `get` looks the task up by its primary key, the key the ownership check reads.
  */
 const OwnedTaskRoutes = {
   get: {
@@ -96,7 +101,10 @@ const OwnedTaskRoutes = {
       if (!(await isOwnTask(this.taskModel, params.id, caller))) {
         return notFound();
       }
-      return DefaultRoutes.Get.func.call(this, ctx, params);
+      return DefaultRoutes.Get.func.call(this, ctx, {
+        ...params,
+        index: undefined,
+      });
     },
   },
   list: {
