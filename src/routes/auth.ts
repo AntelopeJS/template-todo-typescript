@@ -112,8 +112,9 @@ export class AuthController extends Controller("/auth") {
   }
 
   /**
-   * `GET /auth/me`: returns the profile of the user the token belongs to, or
-   * 404 if that user no longer exists.
+   * `GET /auth/me`: returns the profile of the user the token belongs to.
+   * Answers 401 when the token is missing or invalid and 404 when that user no
+   * longer exists.
    */
   @Get("/me")
   async getUserProfile(@Authentication() auth: AuthUser) {

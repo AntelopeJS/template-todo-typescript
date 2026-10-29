@@ -38,7 +38,7 @@ export class TaskModel extends TaskModelBase {
    *
    * @param id Task ID
    * @param taskData Partial task data to update
-   * @returns The count that `update` resolves to
+   * @returns Number of modified documents
    */
   async updateTask(
     id: string,

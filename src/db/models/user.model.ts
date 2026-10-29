@@ -41,7 +41,7 @@ export class UserModel extends UserModelBase {
    *
    * @param id User ID
    * @param userData Partial user data to update
-   * @returns The count that `update` resolves to
+   * @returns Number of modified documents
    */
   async updateUser(
     id: string,
