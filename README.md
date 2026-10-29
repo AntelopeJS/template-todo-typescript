@@ -18,9 +18,10 @@ my-todo/
 │   │   ├── tables/           # User (hashed password) and Task tables
 │   │   └── models/           # UserModel and TaskModel
 │   ├── routes/auth.ts        # /auth/register, /auth/login, /auth/me
-│   └── data-api/tasks.ts     # /tasks CRUD routes, all behind authentication
+│   └── data-api/tasks.ts     # /tasks CRUD routes, each scoped to the caller's tasks
 ├── test/
-│   └── example.test.ts       # calls the API of the running module
+│   ├── example.test.ts       # calls the API of the running module
+│   └── task-ownership.test.ts # one user cannot reach another user's tasks
 ├── antelope.config.ts        # written by ajs project init and ajs project modules install
 ├── antelope.test.ts          # test configuration: API, auth-jwt and an in-memory MongoDB
 ├── package.json
@@ -61,13 +62,13 @@ curl localhost:8080/tasks/list -H "x-antelopejs-auth: $TOKEN"
 | `POST`   | `/auth/register`        | Creates a user                 |
 | `POST`   | `/auth/login`           | Returns a JWT                  |
 | `GET`    | `/auth/me`              | Returns the authenticated user |
-| `GET`    | `/tasks/list`           | Lists tasks (paginated)        |
-| `GET`    | `/tasks/get?id=<id>`    | Returns a task                 |
-| `POST`   | `/tasks/new`            | Creates a task                 |
-| `PUT`    | `/tasks/edit?id=<id>`   | Updates a task                 |
-| `DELETE` | `/tasks/delete?id=<id>` | Deletes a task                 |
+| `GET`    | `/tasks/list`           | Lists your tasks (paginated)   |
+| `GET`    | `/tasks/get?id=<id>`    | Returns one of your tasks      |
+| `POST`   | `/tasks/new`            | Creates a task that you own    |
+| `PUT`    | `/tasks/edit?id=<id>`   | Updates one of your tasks      |
+| `DELETE` | `/tasks/delete?id=<id>` | Deletes your tasks among `id`s |
 
-The `/tasks` routes answer `401` without a valid token.
+The `/tasks` routes answer `401` without a valid token. Each one reaches only the caller's tasks: `new` takes `userId` from the token and sets `createdAt` and `updatedAt`, `edit` refreshes `updatedAt`, `get` and `edit` answer `404` for a task of another user as for a missing one, and `delete` skips such ids.
 
 ## Test it
 

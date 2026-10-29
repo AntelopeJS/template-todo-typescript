@@ -25,7 +25,7 @@ interface LoginRequest {
 }
 
 /** Payload that `login` signs into the token and `Authentication()` returns. */
-interface AuthUser {
+export interface AuthUser {
   userId: string;
   email: string;
 }
