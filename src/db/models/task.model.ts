@@ -1,26 +1,26 @@
 import { BasicDataModel } from "@antelopejs/interface-database-decorators";
 import { Task } from "../tables/task.table";
 
-// Create a basic model for the Task table
 const TaskModelBase = BasicDataModel(Task, "tasks");
 
 /**
- * Extended Task Model with additional custom methods
+ * Model of the `tasks` table, with task helpers on top of `BasicDataModel`.
  */
 export class TaskModel extends TaskModelBase {
   /**
    * Get tasks by user ID
    * @param userId User ID
-   * @returns Array of tasks assigned to the user
+   * @returns Tasks whose `userId` is `userId`
    */
   async getTasksByUserId(userId: string) {
     return this.getBy("userId", userId);
   }
 
   /**
-   * Create a new task
-   * @param taskData Task data without id, createdAt and updatedAt fields
-   * @returns Created task
+   * Create a new task.
+   * Sets `createdAt` and `updatedAt` to the current time.
+   *
+   * @param taskData Task data without `createdAt` and `updatedAt`
    */
   async createTask(taskData: Omit<Task, "id" | "createdAt" | "updatedAt">) {
     const now = new Date();
@@ -33,10 +33,12 @@ export class TaskModel extends TaskModelBase {
   }
 
   /**
-   * Update task data
+   * Update task data.
+   * Sets `updatedAt` to the current time.
+   *
    * @param id Task ID
    * @param taskData Partial task data to update
-   * @returns Updated task
+   * @returns Number of modified documents
    */
   async updateTask(
     id: string,

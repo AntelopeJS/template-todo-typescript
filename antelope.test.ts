@@ -1,16 +1,26 @@
-import { createServer } from "node:net";
+import { createServer, type AddressInfo, type Server } from "node:net";
 import { defineConfig } from "@antelopejs/interface-core/config";
 import { MongoMemoryServer } from "mongodb-memory-server-core";
 
 let mongod: MongoMemoryServer | undefined;
+
+function isTcpAddress(
+  address: ReturnType<Server["address"]>,
+): address is AddressInfo {
+  return typeof address === "object" && address !== null;
+}
 
 function findFreePort(): Promise<number> {
   return new Promise((resolve, reject) => {
     const server = createServer();
     server.once("error", reject);
     server.listen(0, "127.0.0.1", () => {
-      const { port } = server.address() as { port: number };
-      server.close(() => resolve(port));
+      const address = server.address();
+      if (!isTcpAddress(address)) {
+        server.close(() => reject(new Error("The server has no TCP port")));
+        return;
+      }
+      server.close(() => resolve(address.port));
     });
   });
 }
@@ -50,7 +60,10 @@ export default defineConfig({
   },
   test: {
     folder: "test",
-    // Serve the API on a free port, start a throwaway MongoDB server and point the modules to them.
+    /**
+     * Serves the API on a free port, starts a throwaway MongoDB server and
+     * points the modules to them.
+     */
     async setup() {
       const port = await findFreePort();
       const apiUrl = `http://127.0.0.1:${port}`;

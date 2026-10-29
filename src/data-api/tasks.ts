@@ -17,9 +17,12 @@ import {
 } from "@antelopejs/interface-data-api/metadata";
 import { Model } from "@antelopejs/interface-database-decorators";
 
-// Authentication() is appended (not prepended) so it runs as an extra parameter
-// provider (enforcing 401 on missing/invalid token) without shifting the positional
-// args consumed by the default DataController handlers.
+/**
+ * The default data routes, each with `Authentication()` appended to its parameters.
+ *
+ * Appending, rather than prepending, keeps the positional arguments the default
+ * `DataController` handlers read, while a request without a valid token gets a 401.
+ */
 const AuthenticatedRoutes = {
   get: {
     ...DefaultRoutes.Get,
@@ -44,8 +47,8 @@ const AuthenticatedRoutes = {
 };
 
 /**
- * Task Data API Controller
- * Provides CRUD operations for tasks with authentication
+ * Task CRUD routes under `/tasks`: `get`, `list`, `new`, `edit` and `delete`,
+ * each requiring a valid token.
  */
 @RegisterDataController()
 export class TaskDataAPI extends DataController(
