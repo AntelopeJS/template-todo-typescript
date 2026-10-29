@@ -1,7 +1,6 @@
 import assert from "node:assert";
 
-// antelope.test.ts builds and starts this module with the modules it depends on,
-// and sets the address of the API.
+/** Address of the API that the `antelope.test.ts` setup serves for this suite. */
 const API_URL = process.env.TEST_API_URL;
 
 function request(method, path, token, body) {

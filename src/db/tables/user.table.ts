@@ -8,7 +8,8 @@ import {
 } from "@antelopejs/interface-database-decorators";
 
 /**
- * User table definition with basic user fields
+ * The `users` table: an email, a password that `@Hashed()` stores only as
+ * a hash, and the creation and update dates.
  */
 @RegisterTable("users", "default")
 export class User extends Table.with(HashModifier) {

@@ -50,7 +50,10 @@ export default defineConfig({
   },
   test: {
     folder: "test",
-    // Serve the API on a free port, start a throwaway MongoDB server and point the modules to them.
+    /**
+     * Serves the API on a free port, starts a throwaway MongoDB server and
+     * points the modules to them.
+     */
     async setup() {
       const port = await findFreePort();
       const apiUrl = `http://127.0.0.1:${port}`;

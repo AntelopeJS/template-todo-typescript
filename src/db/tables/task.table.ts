@@ -8,7 +8,8 @@ import {
 import { User } from "./user.table";
 
 /**
- * Task table definition with title, description and userId fields
+ * The `tasks` table: a title, a description, the `userId` of the user who
+ * owns the task, and the creation and update dates.
  */
 @RegisterTable("tasks", "default")
 export class Task extends Table {

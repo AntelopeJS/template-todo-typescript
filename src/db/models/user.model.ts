@@ -1,17 +1,16 @@
 import { BasicDataModel } from "@antelopejs/interface-database-decorators";
 import { User } from "../tables/user.table";
 
-// Create a basic model for the User table
 const UserModelBase = BasicDataModel(User, "users");
 
 /**
- * Extended User Model with additional custom methods
+ * Model of the `users` table, with user helpers on top of `BasicDataModel`.
  */
 export class UserModel extends UserModelBase {
   /**
    * Get user by email
    * @param email User email
-   * @returns User or undefined if not found
+   * @returns The first user with that email, or `undefined` if there is none
    */
   async getUserByEmail(email: string) {
     return this.getBy("email", email).then((users) =>
@@ -20,9 +19,11 @@ export class UserModel extends UserModelBase {
   }
 
   /**
-   * Create a new user
-   * @param userData User data without id, createdAt and updatedAt fields
-   * @returns Created user
+   * Create a new user.
+   * Sets `createdAt` and `updatedAt` to the current time. `@Hashed()` stores
+   * only a hash of `password`.
+   *
+   * @param userData User data without `createdAt` and `updatedAt`
    */
   async createUser(userData: Omit<User, "id" | "createdAt" | "updatedAt">) {
     const now = new Date();
@@ -35,10 +36,12 @@ export class UserModel extends UserModelBase {
   }
 
   /**
-   * Update user data
+   * Update user data.
+   * Sets `updatedAt` to the current time.
+   *
    * @param id User ID
    * @param userData Partial user data to update
-   * @returns Updated user
+   * @returns The count that `update` resolves to
    */
   async updateUser(
     id: string,

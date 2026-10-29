@@ -12,10 +12,8 @@ import { SignRaw, Authentication } from "@antelopejs/interface-auth";
 import { Model } from "@antelopejs/interface-database-decorators";
 import { UserModel } from "../db";
 
-// Configuration
 const TOKEN_EXPIRY = "24h";
 
-// Define interfaces for request data
 interface RegisterRequest {
   email: string;
   password: string;
@@ -26,15 +24,15 @@ interface LoginRequest {
   password: string;
 }
 
-// Define the JWT payload interface
+/** Payload that `login` signs into the token and `Authentication()` returns. */
 interface AuthUser {
   userId: string;
   email: string;
 }
 
 /**
- * Authentication Controller
- * Handles user registration, login, and profile retrieval
+ * Authentication routes under `/auth`: registration, login and the current
+ * user's profile.
  */
 export class AuthController extends Controller("/auth") {
   @Context()
@@ -44,15 +42,15 @@ export class AuthController extends Controller("/auth") {
   declare userModel: UserModel;
 
   /**
-   * Register a new user
-   * POST /auth/register
+   * `POST /auth/register`: creates a user from an email and a password of at
+   * least 6 characters. Answers 400 when a field is missing or empty or the
+   * password is too short, and 409 when the email is taken.
    */
   @Post("/register")
   async register(@RawBody() body: Buffer) {
     const data = JSON.parse(body.toString()) as RegisterRequest;
     const { email, password } = data;
 
-    // Validate inputs
     if (!email || !password) {
       return new HTTPResult(400, "Email and password are required");
     }
@@ -61,13 +59,11 @@ export class AuthController extends Controller("/auth") {
       return new HTTPResult(400, "Password must be at least 6 characters long");
     }
 
-    // Check if user already exists
     const existingUser = await this.userModel.getUserByEmail(email);
     if (existingUser) {
       return new HTTPResult(409, "User with this email already exists");
     }
 
-    // Create the user - password will be automatically hashed by the @Hashed decorator
     await this.userModel.createUser({
       email,
       password,
@@ -75,32 +71,29 @@ export class AuthController extends Controller("/auth") {
   }
 
   /**
-   * Login user
-   * POST /auth/login
+   * `POST /auth/login`: checks an email and password and returns the user with
+   * a token valid for 24 hours. Answers 400 when a field is missing or empty and
+   * 401 when the credentials do not match.
    */
   @Post("/login")
   async login(@RawBody() body: Buffer) {
     const data = JSON.parse(body.toString()) as LoginRequest;
     const { email, password } = data;
 
-    // Validate inputs
     if (!email || !password) {
       return new HTTPResult(400, "Email and password are required");
     }
 
-    // Find user by email
     const user = await this.userModel.getUserByEmail(email);
     if (!user) {
       return new HTTPResult(401, "Invalid credentials");
     }
 
-    // Compare password using the HashModifier's testHash method
     const isPasswordMatch = user.testHash("password", password);
     if (!isPasswordMatch) {
       return new HTTPResult(401, "Invalid credentials");
     }
 
-    // Generate JWT token using the auth interface
     const token = await SignRaw(
       {
         userId: user._id,
@@ -119,8 +112,8 @@ export class AuthController extends Controller("/auth") {
   }
 
   /**
-   * Get current user profile using Authentication decorator
-   * GET /auth/me
+   * `GET /auth/me`: returns the profile of the user the token belongs to, or
+   * 404 if that user no longer exists.
    */
   @Get("/me")
   async getUserProfile(@Authentication() auth: AuthUser) {
