@@ -26,6 +26,11 @@ describe("todo API", () => {
     assert.strictEqual(response.status, 401);
   });
 
+  it("rejects a task body that is not a JSON object", async () => {
+    const response = await request("POST", "/tasks/new", token, null);
+    assert.strictEqual(response.status, 400);
+  });
+
   it("creates and lists tasks", async () => {
     const created = await request("POST", "/tasks/new", token, {
       title: "Write tests",

@@ -90,12 +90,12 @@ export function request(
   method: string,
   path: string,
   token?: string,
-  body?: Credentials | TaskFields,
+  body?: Credentials | TaskFields | null,
 ): Promise<Response> {
   return fetch(`${API_URL}${path}`, {
     method,
     headers: token ? { "x-antelopejs-auth": token } : {},
-    ...(body && { body: JSON.stringify(body) }),
+    ...(body !== undefined && { body: JSON.stringify(body) }),
   });
 }
 
