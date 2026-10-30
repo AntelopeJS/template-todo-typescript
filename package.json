@@ -12,7 +12,7 @@
     "sync": "antelopejs-sync --profile template",
     "ratchet:update": "antelopejs-ratchet --update",
     "sync:check": "antelopejs-sync --check --profile template",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p test",
     "lint": "oxlint",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
