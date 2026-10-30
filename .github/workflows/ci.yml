@@ -13,5 +13,13 @@ jobs:
   ci:
     uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v1
     permissions:
+      contents: read
+    with:
+      renovate-sync: false
+  renovate-sync:
+    if: >-
+      github.event_name == 'pull_request' && startsWith(github.head_ref, 'renovate/') && github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
       contents: write
       actions: write
+    uses: AntelopeJS/.github/.github/workflows/ci-renovate-sync.yml@v1
