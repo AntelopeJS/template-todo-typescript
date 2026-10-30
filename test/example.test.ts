@@ -1,19 +1,12 @@
 import assert from "node:assert";
-
-/** Address of the API that the `antelope.test.ts` setup serves for this suite. */
-const API_URL = process.env.TEST_API_URL;
-
-function request(method, path, token, body) {
-  return fetch(`${API_URL}${path}`, {
-    method,
-    headers: token ? { "x-antelopejs-auth": token } : {},
-    ...(body && { body: JSON.stringify(body) }),
-  });
-}
+import { readList, readLogin, request, type Credentials } from "./api.ts";
 
 describe("todo API", () => {
-  const credentials = { email: "test@example.com", password: "password" };
-  let token;
+  const credentials: Credentials = {
+    email: "test@example.com",
+    password: "password",
+  };
+  let token: string;
 
   before(async () => {
     const register = await request(
@@ -25,7 +18,7 @@ describe("todo API", () => {
     assert.ok(register.ok, `POST /auth/register returned ${register.status}`);
     const login = await request("POST", "/auth/login", undefined, credentials);
     assert.strictEqual(login.status, 200);
-    ({ token } = await login.json());
+    ({ token } = await readLogin(login));
   });
 
   it("rejects task requests without a token", async () => {
@@ -42,7 +35,7 @@ describe("todo API", () => {
 
     const list = await request("GET", "/tasks/list", token);
     assert.strictEqual(list.status, 200);
-    const { results } = await list.json();
+    const { results } = await readList(list);
     assert.deepStrictEqual(
       results.map((task) => task.title),
       ["Write tests"],
