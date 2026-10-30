@@ -17,7 +17,7 @@ The interface dependencies are consumer ranges, `>=<floor> <1.0.0`. Do not pin t
 
 - `pnpm run checks` runs typecheck, lint, format, knip, `pnpm test`, size, ratchet, suppressions and sync, and prints only what failed. CI runs it through `AntelopeJS/.github/.github/workflows/ci-node.yml@v1`.
 - `pnpm test` is `ajs module test`, from the `@antelopejs/core` dev dependency. The first run downloads a MongoDB binary (about 120 MB) into `~/.cache/mongodb-binaries`; set `MONGOMS_SYSTEM_BINARY` to use a local `mongod`.
-- `typecheck` covers `src/` only. `test/` and `antelope.test.ts` are type-checked by nothing; `ajs module test` only runs them.
+- `typecheck` covers `src/` and `test/` (which has its own `tsconfig.json`). `antelope.test.ts` is type-checked by nothing; `ajs module test` only runs it. Keep `findFreePort` in `test/free-port.ts`: the type-aware lint reads `antelope.test.ts` without the Node types.
 - `guardrails.suppressions.json` caps the lint directives, `@ts-expect-error` and `SAFETY:` comments; its numbers only go down. Fix the code rather than add a suppression.
 - `guardrails.ratchet.json` records the lint findings the template already had. Its numbers only go down: after you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`; the ratchet counts it instead, and `pnpm run checks` fails when a count rises.
 - `pnpm run checks` needs a git repository. `ajs module init` creates one unless you decline or pass `--no-git-init`; then run `git init` first.
