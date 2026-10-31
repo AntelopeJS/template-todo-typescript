@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index de5133f..9c6bc3e 100644
+--- a/package.json
++++ b/package.json
+@@ -21,7 +21,7 @@
+     "suppressions:update": "antelopejs-suppressions --update"
+   },
+   "dependencies": {
+-    "@antelopejs/interface-api": ">=0.0.7 <1.0.0",
++    "@antelopejs/interface-api": ">=0.0.1 <1.0.0",
+     "@antelopejs/interface-auth": ">=0.0.5 <1.0.0",
+     "@antelopejs/interface-core": ">=0.0.6 <1.0.0",
+     "@antelopejs/interface-data-api": ">=0.1.5 <1.0.0",

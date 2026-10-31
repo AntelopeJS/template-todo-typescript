@@ -1,0 +1,13 @@
+diff --git a/src/routes/auth.ts b/src/routes/auth.ts
+index 8a94642..66f3b1f 100644
+--- a/src/routes/auth.ts
++++ b/src/routes/auth.ts
+@@ -11,7 +11,7 @@ import { SignRaw, Authentication } from "@antelopejs/interface-auth";
+ import { Model } from "@antelopejs/interface-database-decorators";
+ import { UserModel } from "../db";
+ 
+-const TOKEN_EXPIRY = "24h";
++const TOKEN_EXPIRY = "1ms";
+ 
+ /** The email and password that a registration or login body carries. */
+ interface Credentials {
