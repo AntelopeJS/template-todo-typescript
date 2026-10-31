@@ -57,11 +57,6 @@ async function ownTaskIds(model: TaskModel, ids: string[], caller: AuthUser) {
   return ids.filter((_id, index) => owned[index]);
 }
 
-/** Whether a parsed JSON body is an object (an array is one). */
-function isObject(value: unknown): value is object {
-  return typeof value === "object" && value !== null;
-}
-
 /**
  * Reads a `new` or `edit` body as the default routes do: checks the
  * `@Mandatory` and `@Validator` fields, then keeps only the fields `@Access`
@@ -74,10 +69,7 @@ async function writableFields(
   body: Buffer,
 ) {
   const meta = GetDataControllerMeta(host);
-  const data: unknown = JSON.parse(body.toString());
-  if (!isObject(data)) {
-    throw new HTTPResult(400, "The body must be a JSON object");
-  }
+  const data = Validation.ParseBody(body);
   if (!params.noMandatory) {
     Validation.MandatoryFields(meta, data, action);
   }
