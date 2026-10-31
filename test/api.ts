@@ -99,6 +99,15 @@ export function request(
   });
 }
 
+/** Sends `text` as the body of a request, whatever it holds. */
+export function requestText(
+  method: string,
+  path: string,
+  text: string,
+): Promise<Response> {
+  return fetch(`${API_URL}${path}`, { method, body: text });
+}
+
 async function readAs<Answer>(
   response: Response,
   isAnswer: (value: unknown) => value is Answer,

@@ -13,14 +13,32 @@ import { UserModel } from "../db";
 
 const TOKEN_EXPIRY = "24h";
 
-interface RegisterRequest {
+/** The email and password that a registration or login body carries. */
+interface Credentials {
   email: string;
   password: string;
 }
 
-interface LoginRequest {
-  email: string;
-  password: string;
+function isCredentials(value: unknown): value is Credentials {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "email" in value &&
+    typeof value.email === "string" &&
+    "password" in value &&
+    typeof value.password === "string"
+  );
+}
+
+/** The credentials in a request body, or undefined when it holds none. */
+function readCredentials(body: Buffer): Credentials | undefined {
+  let data: unknown;
+  try {
+    data = JSON.parse(body.toString());
+  } catch {
+    return undefined;
+  }
+  return isCredentials(data) ? data : undefined;
 }
 
 /** Payload that `login` signs into the token and `Authentication()` returns. */
@@ -42,17 +60,17 @@ export class AuthController extends Controller("/auth") {
 
   /**
    * `POST /auth/register`: creates a user from an email and a password of at
-   * least 6 characters. Answers 400 when a field is missing or empty or the
-   * password is too short, and 409 when the email is taken.
+   * least 6 characters. Answers 400 when the body is not a JSON object with string
+   * fields, a field is empty, or the password is too short, and 409 when the
+   * email is taken.
    */
   @Post("/register")
   async register(@RawBody() body: Buffer) {
-    const data = JSON.parse(body.toString()) as RegisterRequest;
-    const { email, password } = data;
-
-    if (!email || !password) {
+    const credentials = readCredentials(body);
+    if (!credentials?.email || !credentials.password) {
       return new HTTPResult(400, "Email and password are required");
     }
+    const { email, password } = credentials;
 
     if (password.length < 6) {
       return new HTTPResult(400, "Password must be at least 6 characters long");
@@ -68,17 +86,17 @@ export class AuthController extends Controller("/auth") {
 
   /**
    * `POST /auth/login`: checks an email and password and returns the user with
-   * a token valid for 24 hours. Answers 400 when a field is missing or empty and
-   * 401 when the credentials do not match.
+   * a token valid for 24 hours. Answers 400 when the body is not a JSON object
+   * with string fields or a field is empty, and 401 when the credentials do not
+   * match.
    */
   @Post("/login")
   async login(@RawBody() body: Buffer) {
-    const data = JSON.parse(body.toString()) as LoginRequest;
-    const { email, password } = data;
-
-    if (!email || !password) {
+    const credentials = readCredentials(body);
+    if (!credentials?.email || !credentials.password) {
       return new HTTPResult(400, "Email and password are required");
     }
+    const { email, password } = credentials;
 
     const user = await this.userModel.getUserByEmail(email);
     if (!user) {
