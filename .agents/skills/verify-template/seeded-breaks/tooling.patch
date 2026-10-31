@@ -1,0 +1,13 @@
+diff --git a/test/task-ownership.test.ts b/test/task-ownership.test.ts
+index fc6da3d..b8c1c99 100644
+--- a/test/task-ownership.test.ts
++++ b/test/task-ownership.test.ts
+@@ -80,7 +80,7 @@ describe("task ownership", () => {
+     const created = await getTask(alice.token, id);
+     const createdAt = Date.parse(created.createdAt);
+     assert.ok(createdAt >= before, `createdAt is ${created.createdAt}`);
+-    assert.strictEqual(Date.parse(created.updatedAt), createdAt);
++    assert.strictEqual(Date.parse(created.updatedAt), createdAt + 1);
+ 
+     await wait(10);
+     const edit = await request("PUT", `/tasks/edit?id=${id}`, alice.token, {

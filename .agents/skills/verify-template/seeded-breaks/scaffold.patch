@@ -1,0 +1,11 @@
+diff --git a/package.json b/package.json
+index de5133f..2c0ab80 100644
+--- a/package.json
++++ b/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "antelopejs-module",
++  "name": "my-module",
+   "version": "0.0.1",
+   "private": true,
+   "main": "dist/index.js",
