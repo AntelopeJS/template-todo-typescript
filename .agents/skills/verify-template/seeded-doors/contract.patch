@@ -9,5 +9,5 @@ index de5133f..9c6bc3e 100644
 -    "@antelopejs/interface-api": ">=0.0.7 <1.0.0",
 +    "@antelopejs/interface-api": ">=0.0.1 <1.0.0",
      "@antelopejs/interface-auth": ">=0.0.5 <1.0.0",
-     "@antelopejs/interface-core": ">=0.0.6 <1.0.0",
-     "@antelopejs/interface-data-api": ">=0.1.5 <1.0.0",
+     "@antelopejs/interface-core": "file:.campaign/tgz/antelopejs-interface-core-f7df541.tgz",
+     "@antelopejs/interface-data-api": "file:.campaign/tgz/antelopejs-interface-data-api-e070b68.tgz",
