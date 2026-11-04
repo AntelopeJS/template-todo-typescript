@@ -1,0 +1,13 @@
+diff --git a/src/routes/auth.ts b/src/routes/auth.ts
+index 8a94642..9193ad1 100644
+--- a/src/routes/auth.ts
++++ b/src/routes/auth.ts
+@@ -72,7 +72,7 @@ export class AuthController extends Controller("/auth") {
+     }
+     const { email, password } = credentials;
+ 
+-    if (password.length < 6) {
++    if (password.length < 3) {
+       return new HTTPResult(400, "Password must be at least 6 characters long");
+     }
+ 

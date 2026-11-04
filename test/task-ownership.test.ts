@@ -1,21 +1,25 @@
 import assert from "node:assert";
-
-/** Address of the API that the `antelope.test.ts` setup serves for this suite. */
-const API_URL = process.env.TEST_API_URL;
+import {
+  readIds,
+  readList,
+  readLogin,
+  readTask,
+  request,
+  type Credentials,
+  type TaskFields,
+} from "./api.ts";
 
 /** Id that names no task. */
 const MISSING_ID = "00000000-0000-0000-0000-000000000000";
 
-function request(method, path, token, body?) {
-  return fetch(`${API_URL}${path}`, {
-    method,
-    headers: token ? { "x-antelopejs-auth": token } : {},
-    ...(body && { body: JSON.stringify(body) }),
-  });
+/** A registered user and the token its login gave. */
+interface Session {
+  token: string;
+  userId: string;
 }
 
-async function signIn(email) {
-  const credentials = { email, password: "password" };
+async function signIn(email: string): Promise<Session> {
+  const credentials: Credentials = { email, password: "password" };
   const register = await request(
     "POST",
     "/auth/register",
@@ -25,34 +29,34 @@ async function signIn(email) {
   assert.ok(register.ok, `POST /auth/register returned ${register.status}`);
   const login = await request("POST", "/auth/login", undefined, credentials);
   assert.strictEqual(login.status, 200);
-  const { token, user } = await login.json();
+  const { token, user } = await readLogin(login);
   return { token, userId: user.id };
 }
 
-async function createTask(token, body) {
+async function createTask(token: string, body: TaskFields): Promise<string> {
   const created = await request("POST", "/tasks/new", token, body);
   assert.strictEqual(created.status, 200);
-  const [id] = await created.json();
+  const [id] = await readIds(created);
   return id;
 }
 
-async function getTask(token, id) {
+async function getTask(token: string, id: string) {
   const response = await request("GET", `/tasks/get?id=${id}`, token);
   assert.strictEqual(response.status, 200);
-  return response.json();
+  return readTask(response);
 }
 
-async function answer(response) {
+async function answer(response: Response) {
   return { status: response.status, body: await response.text() };
 }
 
-function wait(milliseconds) {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+function wait(milliseconds: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, milliseconds));
 }
 
 describe("task ownership", () => {
-  let alice;
-  let bob;
+  let alice: Session;
+  let bob: Session;
 
   before(async () => {
     alice = await signIn("alice@example.com");
@@ -113,7 +117,7 @@ describe("task ownership", () => {
     for (const query of ["", `?filter_userId=${alice.userId}`]) {
       const list = await request("GET", `/tasks/list${query}`, bob.token);
       assert.strictEqual(list.status, 200);
-      const { results, total } = await list.json();
+      const { results, total } = await readList(list);
       assert.deepStrictEqual(
         results.map((task) => [task.title, task.userId]),
         [["bob's list task", bob.userId]],

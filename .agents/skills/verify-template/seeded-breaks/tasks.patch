@@ -1,0 +1,13 @@
+diff --git a/src/data-api/tasks.ts b/src/data-api/tasks.ts
+index b52d6bd..5cc8231 100644
+--- a/src/data-api/tasks.ts
++++ b/src/data-api/tasks.ts
+@@ -46,7 +46,7 @@ function notFound() {
+ async function isOwnTask(model: TaskModel, id: string, caller: AuthUser) {
+   const task = await model.get(id);
+   const owner = task?.userId;
+-  return owner != null && owner === caller.userId;
++  return owner != null;
+ }
+ 
+ /** The ids among `ids` that name tasks belonging to `caller`. */

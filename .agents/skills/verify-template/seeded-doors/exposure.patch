@@ -1,0 +1,13 @@
+diff --git a/src/data-api/tasks.ts b/src/data-api/tasks.ts
+index b52d6bd..b133d61 100644
+--- a/src/data-api/tasks.ts
++++ b/src/data-api/tasks.ts
+@@ -188,7 +188,7 @@ const OwnedTaskRoutes = {
+ export class TaskDataAPI extends DataController(
+   Task,
+   OwnedTaskRoutes,
+-  Controller("/tasks"),
++  Controller("/todos"),
+ ) {
+   @ModelReference()
+   @Model(TaskModel, "default")

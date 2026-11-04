@@ -69,7 +69,7 @@ async function writableFields(
   body: Buffer,
 ) {
   const meta = GetDataControllerMeta(host);
-  const data = JSON.parse(body.toString());
+  const data = Validation.ParseBody(body);
   if (!params.noMandatory) {
     Validation.MandatoryFields(meta, data, action);
   }
