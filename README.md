@@ -30,22 +30,22 @@ my-todo/
 
 ## Create it
 
-Install the CLI once with `pnpm add -g @antelopejs/core`, then create a project from this template and add the modules that implement its interfaces (`@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`):
+Create a project from this template and add the modules that implement its interfaces (`@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`):
 
 ```bash
-ajs project init my-todo --template "Todo App Typescript"
+npx @antelopejs/core project init my-todo --template todo-app-typescript
 cd my-todo
-ajs project modules install
+npx @antelopejs/core project modules install
 ```
 
-`ajs project modules install` adds the three modules to `antelope.config.ts` with a default configuration. It serves the API on `http://localhost:8080`, connects to MongoDB at `mongodb://localhost:27017`, and sets a placeholder JWT secret. Change the secret and the connection string there before you deploy.
+`npx @antelopejs/core project modules install` adds the three modules to `antelope.config.ts` with a default configuration. It serves the API on `http://localhost:8080`, connects to MongoDB at `mongodb://localhost:27017`, and sets a placeholder JWT secret. Change the secret and the connection string there before you deploy.
 
 ## Run it
 
 Start a MongoDB server on `localhost:27017`, then run the project:
 
 ```bash
-ajs project dev --watch
+npx @antelopejs/core project dev --watch
 ```
 
 Register, log in, and send the token in the `x-antelopejs-auth` header:
