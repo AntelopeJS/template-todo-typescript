@@ -17,7 +17,7 @@ The interface dependencies are consumer ranges, `>=<floor> <1.0.0`. Do not pin t
 
 - `pnpm run checks` runs typecheck, lint, format, knip, `pnpm test`, size, ratchet, suppressions and sync, and prints only what failed. CI runs it through `AntelopeJS/.github/.github/workflows/ci-node.yml@v1`.
 - `pnpm test` is `ajs module test`, from the `@antelopejs/core` dev dependency. The first run downloads a MongoDB binary (about 120 MB) into `~/.cache/mongodb-binaries`; set `MONGOMS_SYSTEM_BINARY` to use a local `mongod`.
-- `typecheck` covers `src/` and `test/` (which has its own `tsconfig.json`). `antelope.test.ts` is type-checked by nothing; `ajs module test` only runs it. Keep `findFreePort` in `test/free-port.ts`: the type-aware lint reads `antelope.test.ts` without the Node types.
+- `typecheck` covers `src/`, `test/` (which has its own `tsconfig.json`) and, through `tsconfig.config.json`, `antelope.test.ts` and `antelope.config.ts`. The root `tsconfig.json` references `tsconfig.config.json` so type-aware lint reads those two files with the Node types; `tsc -p .` and the `npx tsc` build leave it unbuilt.
 - `guardrails.suppressions.json` caps the lint directives, `@ts-expect-error` and `SAFETY:` comments; its numbers only go down. Fix the code rather than add a suppression.
 - `guardrails.ratchet.json` records the lint findings the template already had. Its numbers only go down: after you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`; the ratchet counts it instead, and `pnpm run checks` fails when a count rises.
 - `pnpm run checks` needs a git repository. `ajs module init` creates one unless you decline or pass `--no-git-init`; then run `git init` first.
@@ -77,6 +77,7 @@ Verify a boundary against the imports a developer or agent would plausibly write
 | String-keyed object tables are read through own keys only                      | `antelopejs/no-inherited-key-lookup`                |
 | A type guard checks each member it narrows to; keys with `Object.hasOwn`       | `antelopejs/no-presence-only-type-guard`            |
 | A type guard checks the nested elements and values it claims                   | review; no tool                                     |
+| Every file type-aware lint reads is listed by a tsconfig                       | `antelopejs/require-tsconfig-include`               |
 | Params ≤ 5, function ≤ 120 lines, file ≤ 500 lines, depth ≤ 4, complexity ≤ 20 | `eslint/max-*`, `eslint/complexity`                 |
 | Cleanup preserves declarations, runtime exports and DMS auto-imports           | `antelopejs-api-diff <base-ref>`                    |
 | Comment-only changes preserve JavaScript emit                                  | `antelopejs-comment-proof <base-ref>`               |

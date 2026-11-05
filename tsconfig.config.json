@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "composite": true,
+    "emitDeclarationOnly": true,
+    "rootDir": ".",
+    "outDir": "node_modules/.cache/config",
+    "tsBuildInfoFile": "node_modules/.cache/config/.tsbuildinfo",
+    "skipLibCheck": true
+  },
+  "include": [
+    "./antelope.test.ts",
+    "./antelope.config.ts",
+    "./test/free-port.ts"
+  ]
+}
