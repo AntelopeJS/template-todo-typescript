@@ -1,6 +1,6 @@
 # Feature map
 
-One file per feature. `covers:` lists the source globs it owns, `docs:` the pages a verdict judges, `journeys:` the journeys it runs, and `seeded-breaks/<feature>.patch` the break its journeys must catch. `pnpm exec antelopejs-verify map` checks that every user-facing file is covered.
+One file per feature. `covers:` lists the source globs it owns, `docs:` the pages a verdict judges, and `journeys:` the journeys it runs. `pnpm exec antelopejs-verify map` checks that every user-facing file is covered.
 
 Every journey creates the project the way the README says: `ajs project init` from an offline manifest listing the working tree, `pnpm install`, then `ajs project modules install --yes` against the public interfaces repository (`https://github.com/AntelopeJS/interfaces`), which resolves and installs `@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb` from the npm registry. The journeys then point the API at a free port and the database at a MongoDB container of the run, start `ajs project dev`, and send the README's `curl` requests with the token in `x-antelopejs-auth`. The database is read back with `mongosh` in the container as a second view next to what the API answered. They need network access for the registry and the interfaces repository.
 
