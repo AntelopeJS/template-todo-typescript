@@ -12,7 +12,7 @@
     "sync": "antelopejs-sync --profile template",
     "ratchet:update": "antelopejs-ratchet --update",
     "sync:check": "antelopejs-sync --check --profile template",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p test",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p test && tsc --noEmit -p tsconfig.config.json",
     "lint": "oxlint",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
@@ -21,19 +21,19 @@
     "suppressions:update": "antelopejs-suppressions --update"
   },
   "dependencies": {
-    "@antelopejs/interface-api": ">=0.0.7 <1.0.0",
-    "@antelopejs/interface-auth": ">=0.0.5 <1.0.0",
+    "@antelopejs/interface-api": ">=0.3.0 <1.0.0",
+    "@antelopejs/interface-auth": ">=0.2.0 <1.0.0",
     "@antelopejs/interface-core": ">=0.4.0 <1.0.0",
-    "@antelopejs/interface-data-api": ">=0.6.0 <1.0.0",
-    "@antelopejs/interface-database": ">=0.1.3 <1.0.0",
-    "@antelopejs/interface-database-decorators": ">=0.1.4 <1.0.0"
+    "@antelopejs/interface-data-api": ">=0.6.1 <1.0.0",
+    "@antelopejs/interface-database": ">=0.3.0 <1.0.0",
+    "@antelopejs/interface-database-decorators": ">=0.2.0 <1.0.0"
   },
   "devDependencies": {
     "@antelopejs/core": "^1.20.0",
-    "@antelopejs/tooling-configs": "^0.2.17",
+    "@antelopejs/tooling-configs": "^0.2.18",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.19.15",
-    "knip": "^6.43.0",
+    "@types/node": "^24.19.2",
+    "knip": "^6.44.1",
     "mongodb-memory-server-core": "^11.3.0",
     "oxfmt": "^0.66.0",
     "oxlint": "1.81.0",
