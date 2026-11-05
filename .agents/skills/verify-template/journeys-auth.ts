@@ -2,6 +2,8 @@ import type { Journey } from "@antelopejs/tooling-configs/verify";
 
 import { api, count, refusedAccess, bodyOf, freshEmail, mongo, pick, same, signIn, startProject, text } from "./session.ts";
 
+const SALTED_SCRYPT = /^\$scrypt\$ln=\d+,r=\d+,p=\d+\$[A-Za-z0-9+/]{22,}\$[A-Za-z0-9+/]{22,}$/;
+
 const USERS = "db.default__users";
 
 const authFlow: Journey = {
@@ -16,7 +18,7 @@ const authFlow: Journey = {
     const stored = await mongo(running, "mongosh reads the users", `${USERS}.find().toArray()`);
     context.expect(stored.folder, [
       same("the database holds one user with that email", [count(stored.value), pick(stored.value, 0, "email")], [1, email]),
-      same("the password is stored as a salted hash and the password sent is nowhere in the document", [text(pick(stored.value, 0, "_internal", "data", "password")).length >= 20, text(pick(stored.value, 0, "_internal", "meta", "HashModifier", "salt")) !== "", JSON.stringify(stored.value).includes("secret")], [true, true, false]),
+      same("the password is stored as a salted hash and the password sent is nowhere in the document", [SALTED_SCRYPT.test(text(pick(stored.value, 0, "_internal", "data", "password"))), JSON.stringify(stored.value).includes("secret")], [true, false]),
     ]);
     const login = await api(running, "login", "POST", "/auth/login", { body: credentials });
     const token = text(pick(bodyOf(login), "token"));
