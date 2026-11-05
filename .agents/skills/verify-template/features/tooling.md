@@ -2,6 +2,8 @@
 covers:
   - test/**
   - antelope.test.ts
+  - antelope-lock/**
+  - tsconfig.config.json
   - knip.config.ts
   - oxlint.config.ts
   - oxfmt.config.ts
