@@ -1,8 +1,6 @@
 ---
 covers:
-  - src/data-api/**
-  - src/db/models/task.model.ts
-  - src/db/tables/task.table.ts
+  - src/**
 docs:
   - README.md
 journeys:
