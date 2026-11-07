@@ -19,6 +19,8 @@ const FILES = [
   "antelope.test.ts",
   "package.json",
   "tsconfig.json",
+  ".gitignore",
+  ".nvmrc",
 ];
 
 const SCRIPTS = ["dev", "test", "checks", "typecheck", "lint", "format", "knip"];

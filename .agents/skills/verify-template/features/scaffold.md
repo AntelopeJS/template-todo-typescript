@@ -8,6 +8,8 @@ covers:
   - CONTRIBUTING.md
   - AGENTS.md
   - README.md
+  - .gitignore
+  - .nvmrc
 docs:
   - README.md
 journeys:
@@ -21,7 +23,7 @@ A new user creates a project from the template and installs the modules its inte
 
 ## Sub-features
 
-- `scaffold-files`: the created project has every file the README's tree promises, the manifest named `antelopejs-module` with the documented scripts and the six interface dependencies, and a project config that loads the module.
+- `scaffold-files`: the created project has every file the README's tree promises and the `.gitignore` and `.nvmrc` the repository ships, the manifest named `antelopejs-module` with the documented scripts and the six interface dependencies, and a project config that loads the module.
 - `scaffold-modules`: `ajs project modules install --yes` adds the API, auth-jwt and MongoDB modules to the project config with the defaults the README names: the API on port 8080, MongoDB at `mongodb://localhost:27017` and a placeholder JWT secret.
 
 ## How to get to it (user POV)
