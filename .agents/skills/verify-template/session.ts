@@ -39,23 +39,32 @@ export function same(name: string, actual: Json | undefined | (Json | undefined)
   return equal(name, canonical(Array.isArray(actual) ? tuple(...actual) : actual), canonical(expected));
 }
 
-/** Creates the project from the template with `ajs project init`, as a user does, and installs its dependencies. */
-export async function scaffolded(context: JourneyContext): Promise<string> {
-  const project = join(context.work, "app");
+async function scaffoldInto(context: JourneyContext, project: string): Promise<void> {
   const init = await context.scaffold("ajs project init", project);
   context.expect(init.folder, [exitIs(init, 0)], { critical: true });
   context.tree("scaffolded tree", project);
   const install = await context.command("pnpm install", "pnpm", ["install", "--frozen-lockfile", "--prefer-offline"], { cwd: project });
   context.expect(install.folder, [exitIs(install, 0)], { critical: true });
-  return project;
 }
 
-/** Points `ajs` at the public interfaces repository, then installs the modules the template's interfaces need, as the README says. */
-export async function withModules(context: JourneyContext, project: string): Promise<void> {
+async function installModules(context: JourneyContext, project: string): Promise<void> {
   const git = await context.command("ajs config set git", "pnpm", ["exec", "ajs", "config", "set", "git", INTERFACES], { cwd: project });
   context.expect(git.folder, [exitIs(git, 0)], { critical: true });
   const modules = await context.command("ajs project modules install", "pnpm", ["exec", "ajs", "project", "modules", "install", "--yes"], { cwd: project });
   context.expect(modules.folder, [exitIs(modules, 0)], { critical: true });
+}
+
+/** The journey's copy of the project `ajs project init` creates from the template, with its dependencies installed, as a user does. The run builds it once. */
+export function scaffolded(context: JourneyContext): Promise<string> {
+  return context.prepared("scaffolded", (project) => scaffoldInto(context, project));
+}
+
+/** The journey's copy of the scaffolded project after `ajs project modules install` against the public interfaces repository, as the README says. The run builds it once. */
+export function withModules(context: JourneyContext): Promise<string> {
+  return context.prepared("with-modules", async (project) => {
+    await scaffoldInto(context, project);
+    await installModules(context, project);
+  });
 }
 
 export interface Running {
@@ -87,8 +96,7 @@ async function waitForApi(context: JourneyContext, base: string): Promise<void> 
 
 /** Scaffolds the project, installs its modules, points them at free resources, starts `ajs project dev` and waits until the API answers. */
 export async function startProject(context: JourneyContext): Promise<Running> {
-  const project = await scaffolded(context);
-  await withModules(context, project);
+  const project = await withModules(context);
   const port = await freePort();
   configure(context, project, port);
   const app = await context.dev("ajs-project-dev", project, { env: { PORT: String(port) } });
