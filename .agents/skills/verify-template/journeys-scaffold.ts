@@ -53,8 +53,7 @@ const scaffoldModules: Journey = {
   title: "`ajs project modules install` adds the API, auth-jwt and MongoDB modules to the project config with the defaults the README names",
   entryPoint: "`ajs project modules install --yes` in a scaffolded project, against the public interfaces repository",
   async run(context) {
-    const project = await scaffolded(context);
-    await withModules(context, project);
+    const project = await withModules(context);
     const config = join(project, "antelope.config.ts");
     context.expect(context.tree("project after the install", project).folder, [
       fileHas(config, /"@antelopejs\/api"/),
