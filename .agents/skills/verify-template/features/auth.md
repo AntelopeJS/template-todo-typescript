@@ -35,5 +35,5 @@ pnpm exec antelopejs-verify journey "$RUN" auth
 
 ## Gotchas
 
-- A forged token is refused with 403, where the README says the routes answer 401 without a valid token; the journeys assert that it is refused, 401 or 403, and the difference is drafted as an issue.
+- auth-jwt answers 401 to a request without a token and 403 to a forged or expired one, as the README says; the journeys accept either status for a forged token.
 - The journeys reach the npm registry and the public interfaces repository, so they need network access; the API module listens on `localhost`, which can resolve to IPv6 only, so the journeys address it as `localhost` like the README does.
