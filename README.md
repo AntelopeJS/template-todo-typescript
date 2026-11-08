@@ -68,7 +68,7 @@ curl localhost:8080/tasks/list -H "x-antelopejs-auth: $TOKEN"
 | `PUT`    | `/tasks/edit?id=<id>`   | Updates one of your tasks      |
 | `DELETE` | `/tasks/delete?id=<id>` | Deletes your tasks among `id`s |
 
-The `/tasks` routes answer `401` without a valid token. Each one reaches only the caller's tasks. `new` takes `userId` from the token and sets `createdAt` and `updatedAt`, `edit` refreshes `updatedAt`, `get` and `edit` answer `404` for a task of another user as for a missing one, and `delete` skips such ids.
+The `/tasks` routes and `/auth/me` answer `401` without a token and `403` with an invalid or expired one. Each one reaches only the caller's tasks. `new` takes `userId` from the token and sets `createdAt` and `updatedAt`, `edit` refreshes `updatedAt`, `get` and `edit` answer `404` for a task of another user as for a missing one, and `delete` skips such ids.
 
 ## Test it
 

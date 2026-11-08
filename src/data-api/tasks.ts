@@ -82,8 +82,8 @@ async function writableFields(
  * scoped to the authenticated user.
  *
  * Appending, rather than prepending, keeps the positional arguments the default
- * `DataController` handlers read, while a request without a valid token gets a
- * 401. `get`, `edit` and `delete` treat another user's task as a missing one;
+ * `DataController` handlers read, while a request without a token gets a 401
+ * and one with an invalid or expired token a 403. `get`, `edit` and `delete` treat another user's task as a missing one;
  * `list` always filters on the caller's `userId`; `new` sets `userId` from the
  * token; `new` and `edit` write through {@link TaskModel}, which sets the dates.
  * `get` looks the task up by its primary key, the key the ownership check reads.
