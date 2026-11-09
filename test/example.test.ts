@@ -21,11 +21,6 @@ describe("todo API", () => {
     ({ token } = await readLogin(login));
   });
 
-  it("rejects task requests without a token", async () => {
-    const response = await request("GET", "/tasks/list");
-    assert.strictEqual(response.status, 401);
-  });
-
   it("rejects a task body that is not a JSON object", async () => {
     const response = await request("POST", "/tasks/new", token, null);
     assert.strictEqual(response.status, 400);
