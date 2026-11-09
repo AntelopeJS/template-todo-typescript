@@ -28,7 +28,7 @@ A new user creates a project from the template and installs the modules its inte
 
 ## How to get to it (user POV)
 
-- `ajs project init my-todo --template "Todo App Typescript"`, then `ajs project modules install`.
+- `ajs project init my-todo --template "Todo App Typescript"`, then `ajs project modules install --yes`.
 
 ## Driving it with antelopejs-verify
 
@@ -38,5 +38,5 @@ pnpm exec antelopejs-verify journey "$RUN" scaffold
 
 ## Gotchas
 
-- `ajs project modules install` asks which database module to use when it is not run in a terminal; the journey passes `--yes`, which the README does not mention.
+- Without `--yes`, `ajs project modules install` stops with exit code 2 when it runs without a terminal, because two modules implement `@antelopejs/interface-database`. The journey runs the README's command, `--yes` included.
 - The journeys reach the npm registry and the public interfaces repository, so they need network access; the API module listens on `localhost`, which can resolve to IPv6 only, so the journeys address it as `localhost` like the README does.

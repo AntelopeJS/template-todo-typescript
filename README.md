@@ -35,10 +35,12 @@ Create a project from this template and add the modules that implement its inter
 ```bash
 npx @antelopejs/core project init my-todo --template todo-app-typescript
 cd my-todo
-npx @antelopejs/core project modules install
+npx @antelopejs/core project modules install --yes
 ```
 
-`npx @antelopejs/core project modules install` adds the three modules to `antelope.config.ts` with a default configuration. It serves the API on `http://localhost:8080`, connects to MongoDB at `mongodb://localhost:27017`, and sets a placeholder JWT secret. Change the secret and the connection string there before you deploy.
+`npx @antelopejs/core project modules install --yes` adds the three modules to `antelope.config.ts` with a default configuration. It serves the API on `http://localhost:8080`, connects to MongoDB at `mongodb://localhost:27017`, and sets a placeholder JWT secret. Change the secret and the connection string there before you deploy.
+
+Two modules implement `@antelopejs/interface-database`: `@antelopejs/mongodb` and `@antelopejs/rethinkdb`. `--yes` adds the first one listed, `@antelopejs/mongodb`, without asking, so the command also runs in CI, a script or an agent. Without `--yes`, the command asks in a terminal which database module to add (pick `@antelopejs/mongodb`), and it stops with exit code 2 when there is no terminal to ask in.
 
 ## Run it
 
