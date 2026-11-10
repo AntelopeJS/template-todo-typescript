@@ -6,8 +6,7 @@
     "emitDeclarationOnly": true,
     "rootDir": ".",
     "outDir": "node_modules/.cache/config",
-    "tsBuildInfoFile": "node_modules/.cache/config/.tsbuildinfo",
-    "skipLibCheck": true
+    "tsBuildInfoFile": "node_modules/.cache/config/.tsbuildinfo"
   },
   "include": [
     "./antelope.test.ts",
