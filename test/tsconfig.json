@@ -4,7 +4,6 @@
     "rootDir": "..",
     "noEmit": true,
     "incremental": false,
-    "skipLibCheck": true,
     "allowImportingTsExtensions": true
   },
   "include": ["./**/*.ts"]

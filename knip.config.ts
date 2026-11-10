@@ -1,7 +1,7 @@
 import { antelopeKnipConfig } from "@antelopejs/tooling-configs/knip";
 
 export default Object.assign(
-  antelopeKnipConfig({ ignoreDependencies: ["@types/mocha"] }),
+  antelopeKnipConfig({ ignoreDependencies: ["@types/mocha", "@types/semver"] }),
   {
     ignoreIssues: {
       "src/data-api/index.ts": ["exports"],
