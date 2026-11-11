@@ -103,7 +103,7 @@ export class AuthController extends Controller("/auth") {
       return new HTTPResult(401, "Invalid credentials");
     }
 
-    const isPasswordMatch = user.testHash("password", password);
+    const isPasswordMatch = await user.testHashAsync("password", password);
     if (!isPasswordMatch) {
       return new HTTPResult(401, "Invalid credentials");
     }
