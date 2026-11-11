@@ -87,25 +87,24 @@ async function writableFields(
  * treat another user's task as a missing one; `list` always filters on the
  * caller's `userId`; `new` sets `userId` from the token; `new` and `edit` write
  * through {@link TaskModel}, which sets the dates. `get` looks the task up by
- * its primary key, the key the ownership check reads.
+ * its primary key and checks its owner on the row it reads.
  */
 const OwnedTaskRoutes = {
   get: {
     ...DefaultRoutes.Get,
     args: [...DefaultRoutes.Get.args, Authentication()],
-    async func(
+    func(
       this: TaskRouteHost,
       ctx: RequestContext,
       params: Parameters.GetParameters,
       caller: AuthUser,
     ) {
-      if (!(await isOwnTask(this.taskModel, params.id, caller))) {
-        return notFound();
-      }
-      return DefaultRoutes.Get.func.call(this, ctx, {
-        ...params,
-        index: undefined,
+      const ownTask = DefaultRoutes.WithGetGuard((_ctx, task) => {
+        if (task.userId == null || task.userId !== caller.userId) {
+          throw notFound();
+        }
       });
+      return ownTask.func.call(this, ctx, { ...params, index: undefined });
     },
   },
   list: {
