@@ -6,7 +6,7 @@ An AntelopeJS module template: a todo API with JWT authentication, on `@antelope
 
 - `src/index.ts` imports `./db`, `./routes` and `./data-api`. Those imports register the decorated tables, models and controllers, so keep them even though nothing reads their exports.
 - `src/db/tables` and `src/db/models` hold the schema; `src/routes` holds the auth controller; `src/data-api` holds the task CRUD controller.
-- `test/` holds the mocha suites. `antelope.test.ts` is their configuration for `ajs module test`: it builds the module with `npx tsc`, starts it with `@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`, serves the API on a free port, and starts a throwaway MongoDB.
+- `test/` holds the mocha suites. `antelope.test.ts` is their configuration for `ajs module test`: it builds the module with the project's own `tsc`, run by `node` without `npx`, starts it with `@antelopejs/api`, `@antelopejs/auth-jwt` and `@antelopejs/mongodb`, serves the API on a free port, and starts a throwaway MongoDB.
 - The module name `antelopejs-module` appears in `package.json`, `antelope.test.ts` and, once `ajs` has written it, `antelope.config.ts`; rename it in all three.
 
 ## Versions
