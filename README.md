@@ -28,7 +28,7 @@ my-todo/
 ├── test/
 │   ├── example.test.ts       # calls the API of the running module
 │   └── task-ownership.test.ts # one user cannot reach another user's tasks
-├── antelope.config.ts        # written by ajs project init and ajs project modules install
+├── antelope.config.ts        # the project configuration, with the MongoDB module already listed
 ├── antelope.test.ts          # test configuration: API, auth-jwt and an in-memory MongoDB
 ├── package.json
 └── tsconfig.json
@@ -44,9 +44,9 @@ cd my-todo
 npx @antelopejs/core project modules install --yes
 ```
 
-`npx @antelopejs/core project modules install --yes` adds the three modules to `antelope.config.ts` with a default configuration. It serves the API on `http://localhost:8080`, connects to MongoDB at `mongodb://localhost:27017`, and sets a placeholder JWT secret. Change the secret and the connection string there before you deploy.
+The template ships an `antelope.config.ts` that already lists `@antelopejs/mongodb`, so `npx @antelopejs/core project modules install --yes` adds only the API and auth-jwt modules next to it, with a default configuration. The project serves the API on `http://localhost:8080`, connects to MongoDB at `mongodb://localhost:27017`, and sets a placeholder JWT secret. Change the secret and the connection string there before you deploy.
 
-Two modules implement `@antelopejs/interface-database`: `@antelopejs/mongodb` and `@antelopejs/rethinkdb`. `--yes` adds the first one listed, `@antelopejs/mongodb`, without asking, so the command also runs in CI, a script or an agent. Without `--yes`, the command asks in a terminal which database module to add (pick `@antelopejs/mongodb`), and it stops with exit code 2 when there is no terminal to ask in.
+Several modules implement `@antelopejs/interface-database`, and `modules install` would pick one by the order of the interface's list, so the template names its database itself. To use another one, replace the `mongodb` entry in `antelope.config.ts`.
 
 ## Run it
 
