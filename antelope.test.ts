@@ -18,14 +18,14 @@ export default defineConfig({
       source: {
         type: "package",
         package: "@antelopejs/api",
-        version: "~1.7.5",
+        version: "~1.7.8",
       },
     },
     "auth-jwt": {
       source: {
         type: "package",
         package: "@antelopejs/auth-jwt",
-        version: "~1.1.2",
+        version: "~1.1.3",
       },
       config: { secret: "test-secret" },
     },
@@ -33,7 +33,7 @@ export default defineConfig({
       source: {
         type: "package",
         package: "@antelopejs/mongodb",
-        version: "~1.8.4",
+        version: "~1.8.11",
       },
     },
   },
