@@ -1,5 +1,10 @@
 import assert from "node:assert";
-import { request, requestText, type Credentials } from "./api.ts";
+import {
+  BOOT_HOOK_TIMEOUT_MS,
+  request,
+  requestText,
+  type Credentials,
+} from "./api.ts";
 
 const NOT_CREDENTIALS: Array<[string, string]> = [
   ["null", "null"],
@@ -17,7 +22,8 @@ describe("auth bodies", () => {
     password: "secret1",
   };
 
-  before(async () => {
+  before(async function () {
+    this.timeout(BOOT_HOOK_TIMEOUT_MS);
     const register = await request(
       "POST",
       "/auth/register",
