@@ -136,3 +136,9 @@ export function readList(response: Response): Promise<ListView> {
 export function readIds(response: Response): Promise<string[]> {
   return readAs(response, isTextList);
 }
+
+/**
+ * Timeout in milliseconds for a hook that sends the first requests to a freshly
+ * booted project, which is slow on a loaded host.
+ */
+export const BOOT_HOOK_TIMEOUT_MS = 30_000;

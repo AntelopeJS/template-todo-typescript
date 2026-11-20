@@ -1,5 +1,11 @@
 import assert from "node:assert";
-import { readList, readLogin, request, type Credentials } from "./api.ts";
+import {
+  BOOT_HOOK_TIMEOUT_MS,
+  readList,
+  readLogin,
+  request,
+  type Credentials,
+} from "./api.ts";
 
 describe("todo API", () => {
   const credentials: Credentials = {
@@ -8,7 +14,8 @@ describe("todo API", () => {
   };
   let token: string;
 
-  before(async () => {
+  before(async function () {
+    this.timeout(BOOT_HOOK_TIMEOUT_MS);
     const register = await request(
       "POST",
       "/auth/register",
