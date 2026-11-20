@@ -1,6 +1,7 @@
 import assert from "node:assert";
 import {
   readIds,
+  BOOT_HOOK_TIMEOUT_MS,
   readList,
   readLogin,
   readTask,
@@ -58,7 +59,8 @@ describe("task ownership", () => {
   let alice: Session;
   let bob: Session;
 
-  before(async () => {
+  before(async function () {
+    this.timeout(BOOT_HOOK_TIMEOUT_MS);
     alice = await signIn("alice@example.com");
     bob = await signIn("bob@example.com");
   });
