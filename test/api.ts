@@ -138,7 +138,8 @@ export function readIds(response: Response): Promise<string[]> {
 }
 
 /**
- * Timeout in milliseconds for a hook that sends the first requests to a freshly
- * booted project, which is slow on a loaded host.
+ * Timeout in milliseconds for a `before` hook that registers or logs in users:
+ * the first of them sends the project's first request, and each register and
+ * login pair is slow on a loaded host.
  */
 export const BOOT_HOOK_TIMEOUT_MS = 30_000;
