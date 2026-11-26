@@ -23,8 +23,6 @@ jobs:
       test-job: true
       affected-tests: true
       module-locks: true
-    secrets:
-      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
   module-locks:
     needs: ci
     if: ${{ !cancelled() }}
