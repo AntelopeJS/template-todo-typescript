@@ -34,8 +34,8 @@
     "@types/semver": "^7",
     "knip": "^6.46.1",
     "mongodb-memory-server-core": "^11.3.0",
-    "oxfmt": "^0.79.0",
-    "oxlint": "1.94.0",
+    "oxfmt": "^0.80.0",
+    "oxlint": "1.95.0",
     "oxlint-tsgolint": "^7.0.2007",
     "typescript": "^5.9.3"
   },
