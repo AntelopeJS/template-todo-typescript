@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@antelopejs/core": "~1.24.5",
-    "@antelopejs/tooling-configs": ">=0.8.9 <0.9.0",
+    "@antelopejs/tooling-configs": "^0.10.7",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.19.2",
     "@types/semver": "^7",
@@ -39,7 +39,7 @@
     "oxlint-tsgolint": "^7.0.2007",
     "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.34.9",
   "antelopeJs": {
     "baseUrl": "dist",
     "paths": {
