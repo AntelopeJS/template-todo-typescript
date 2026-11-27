@@ -19,16 +19,16 @@
     "suppressions:update": "antelopejs-suppressions --update"
   },
   "dependencies": {
-    "@antelopejs/interface-api": ">=0.3.3 <0.4.0",
-    "@antelopejs/interface-auth": ">=0.2.1 <0.3.0",
-    "@antelopejs/interface-core": ">=0.5.1 <0.6.0",
-    "@antelopejs/interface-data-api": ">=0.8.0 <0.9.0",
-    "@antelopejs/interface-database": ">=0.4.0 <0.5.0",
-    "@antelopejs/interface-database-decorators": ">=0.5.2 <0.6.0"
+    "@antelopejs/interface-api": ">=0.3.5 <0.4.0",
+    "@antelopejs/interface-auth": ">=0.2.2 <0.3.0",
+    "@antelopejs/interface-core": ">=0.5.4 <0.6.0",
+    "@antelopejs/interface-data-api": ">=0.8.3 <0.9.0",
+    "@antelopejs/interface-database": ">=0.4.5 <0.5.0",
+    "@antelopejs/interface-database-decorators": ">=0.5.4 <0.6.0"
   },
   "devDependencies": {
-    "@antelopejs/core": "~1.24.5",
-    "@antelopejs/tooling-configs": "^0.10.7",
+    "@antelopejs/core": "~1.24.9",
+    "@antelopejs/tooling-configs": "^0.10.8",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.19.2",
     "@types/semver": "^7",
