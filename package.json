@@ -39,7 +39,7 @@
     "oxlint-tsgolint": "^7.0.2007",
     "typescript": "^7.0.0"
   },
-  "packageManager": "pnpm@10.34.9",
+  "packageManager": "pnpm@12.23.0",
   "antelopeJs": {
     "baseUrl": "dist",
     "paths": {
