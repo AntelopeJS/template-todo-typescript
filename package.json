@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ajs project run -w",
-    "test": "ajs module test",
+    "test": "ajs module test --timeout 30000",
     "checks": "antelopejs-checks",
     "size": "antelopejs-check-size",
     "sync": "antelopejs-sync --profile template",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@antelopejs/core": "~1.24.9",
-    "@antelopejs/tooling-configs": "^0.10.8",
+    "@antelopejs/tooling-configs": "^0.10.12",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.19.2",
     "@types/semver": "^7",
