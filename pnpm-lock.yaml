@@ -208,8 +208,8 @@ importers:
         specifier: ~1.24.9
         version: 1.24.9
       '@antelopejs/tooling-configs':
-        specifier: ^0.10.12
-        version: 0.10.12(knip@6.48.0)(oxfmt@0.80.0)(oxlint@1.95.0(oxlint-tsgolint@7.0.2008))
+        specifier: ^0.10.14
+        version: 0.10.14(knip@6.48.0)(oxfmt@0.80.0)(oxlint@1.95.0(oxlint-tsgolint@7.0.2008))
       '@types/mocha':
         specifier: ^10.0.10
         version: 10.0.10
@@ -224,7 +224,7 @@ importers:
         version: 6.48.0
       mongodb-memory-server-core:
         specifier: ^11.3.0
-        version: 11.4.0(bare-buffer@3.7.3)
+        version: 11.4.0(bare-buffer@3.7.3)(supports-color@8.1.1)
       oxfmt:
         specifier: ^0.80.0
         version: 0.80.0
@@ -286,8 +286,8 @@ packages:
     peerDependencies:
       '@antelopejs/interface-core': '>=0.5.1 <0.6.0'
 
-  '@antelopejs/tooling-configs@0.10.12':
-    resolution: {integrity: sha512-2Yjx8JxWr4Opz1hA8363Zctf4SUmtG3DFmm/UaPe1447fWzmTX8FgTDRg1qoEIQ94g/U6rte6lj9cIdNEE3Kmg==}
+  '@antelopejs/tooling-configs@0.10.14':
+    resolution: {integrity: sha512-jSEmmtT7P11Ur9uSJ9oVFTUYRgzgLVpwiOdjp1Xo49y3zwcbV1nu/TCnqRcdPOMeZbRlJtnW0B0iYEi7m0dqGw==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
@@ -1898,7 +1898,7 @@ snapshots:
     dependencies:
       '@antelopejs/interface-core': 0.5.4
 
-  '@antelopejs/tooling-configs@0.10.12(knip@6.48.0)(oxfmt@0.80.0)(oxlint@1.95.0(oxlint-tsgolint@7.0.2008))':
+  '@antelopejs/tooling-configs@0.10.14(knip@6.48.0)(oxfmt@0.80.0)(oxlint@1.95.0(oxlint-tsgolint@7.0.2008))':
     dependencies:
       '@oxlint/plugins': 1.95.0
       dts-bundle-generator: 9.5.1
@@ -2546,7 +2546,7 @@ snapshots:
 
   findit2@2.2.3: {}
 
-  follow-redirects@1.16.3(debug@4.4.3):
+  follow-redirects@1.16.3(debug@4.4.3(supports-color@8.1.1)):
     optionalDependencies:
       debug: 4.4.3(supports-color@8.1.1)
 
@@ -2607,7 +2607,7 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  https-proxy-agent@7.0.6:
+  https-proxy-agent@7.0.6(supports-color@8.1.1):
     dependencies:
       agent-base: 7.1.4
       debug: 4.4.3(supports-color@8.1.1)
@@ -2744,16 +2744,16 @@ snapshots:
       '@types/whatwg-url': 13.0.0
       whatwg-url: 15.1.0
 
-  mongodb-memory-server-core@11.4.0(bare-buffer@3.7.3):
+  mongodb-memory-server-core@11.4.0(bare-buffer@3.7.3)(supports-color@8.1.1):
     dependencies:
       async-mutex: 0.5.0
       camelcase: 6.3.0
       debug: 4.4.3(supports-color@8.1.1)
       find-cache-dir: 3.3.2
-      follow-redirects: 1.16.3(debug@4.4.3)
-      https-proxy-agent: 7.0.6
+      follow-redirects: 1.16.3(debug@4.4.3(supports-color@8.1.1))
+      https-proxy-agent: 7.0.6(supports-color@8.1.1)
       mongodb: 7.5.0
-      new-find-package-json: 2.0.0
+      new-find-package-json: 2.0.0(supports-color@8.1.1)
       semver: 7.8.6
       tar-stream: 3.3.0(bare-buffer@3.7.3)
       tslib: 2.9.1
@@ -2779,7 +2779,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  new-find-package-json@2.0.0:
+  new-find-package-json@2.0.0(supports-color@8.1.1):
     dependencies:
       debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
