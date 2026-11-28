@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@antelopejs/core": "~1.24.9",
-    "@antelopejs/tooling-configs": "^0.10.12",
+    "@antelopejs/tooling-configs": "^0.10.14",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.19.2",
     "@types/semver": "^7",
